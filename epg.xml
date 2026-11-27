@@ -38,6 +38,7 @@
   </channel>
   <channel id="BethelTV.pe">
     <display-name>Bethel TV</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Bethel_Television_logo.svg/512px-Bethel_Television_logo.svg.png" />
   </channel>
   <channel id="BabyTV.lat">
     <display-name>Baby TV</display-name>
@@ -181,6 +182,7 @@
   </channel>
   <channel id="Enlace.lat">
     <display-name>Enlace</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Enlace_TV_logo.svg/512px-Enlace_TV_logo.svg.png" />
   </channel>
   <channel id="EuropaEuropa.lat">
     <display-name>Europa Europa</display-name>
@@ -188,6 +190,7 @@
   </channel>
   <channel id="ExitosaTV.pe">
     <display-name>Exitosa TV</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Exitosa_TV_logo.svg/512px-Exitosa_TV_logo.svg.png" />
   </channel>
   <channel id="FMHFamily.lat">
     <display-name>FMH Family</display-name>
@@ -208,9 +211,11 @@
   </channel>
   <channel id="FilmArts.lat">
     <display-name>Film&amp;Arts</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Film%26Arts_logo.svg/512px-Film%26Arts_logo.svg.png" />
   </channel>
   <channel id="FilmArtsb.lat">
     <display-name>Film&amp;Arts (Op 2)</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Film%26Arts_logo.svg/512px-Film%26Arts_logo.svg.png" />
   </channel>
   <channel id="FoodNetwork.lat">
     <display-name>Food Network</display-name>
@@ -225,9 +230,11 @@
   </channel>
   <channel id="GoldenEdge.lat">
     <display-name>Golden Edge</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Golden_Edge_logo.svg/512px-Golden_Edge_logo.svg.png" />
   </channel>
   <channel id="Golden.lat">
     <display-name>Golden HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Golden_TV_logo.svg/512px-Golden_TV_logo.svg.png" />
   </channel>
   <channel id="HBOFamily.lat">
     <display-name>HBO Family HD</display-name>
@@ -255,9 +262,11 @@
   </channel>
   <channel id="HTV.lat">
     <display-name>HTV</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/HTV_logo.svg/512px-HTV_logo.svg.png" />
   </channel>
   <channel id="HTVb.lat">
     <display-name>HTV (Op 2)</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/HTV_logo.svg/512px-HTV_logo.svg.png" />
   </channel>
   <channel id="History2.lat">
     <display-name>History 2</display-name>
@@ -283,12 +292,15 @@
   </channel>
   <channel id="L1.pe">
     <display-name>L1</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Liga_1_%28Per%C3%BA%29_logo.svg/512px-Liga_1_%28Per%C3%BA%29_logo.svg.png" />
   </channel>
   <channel id="L1Max.pe">
     <display-name>L1 MAX</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Liga_1_%28Per%C3%BA%29_logo.svg/512px-Liga_1_%28Per%C3%BA%29_logo.svg.png" />
   </channel>
   <channel id="LaRed.cl">
     <display-name>La Red</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/La_Red_%28Chile%29_logo.svg/512px-La_Red_%28Chile%29_logo.svg.png" />
   </channel>
   <channel id="LasEstrellas.mx">
     <display-name>Las Estrellas HD</display-name>
@@ -304,6 +316,7 @@
   </channel>
   <channel id="LoveNature.lat">
     <display-name>Love Nature</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Love_Nature_logo.svg/512px-Love_Nature_logo.svg.png" />
   </channel>
   <channel id="Mega.cl">
     <display-name>MEGA HD</display-name>
@@ -331,6 +344,7 @@
   </channel>
   <channel id="MovistarDeportes.pe">
     <display-name>Movistar Deportes</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Movistar_Deportes_logo.svg/512px-Movistar_Deportes_logo.svg.png" />
   </channel>
   <channel id="NuevoTiempo.lat">
     <display-name>Nuevo Tiempo</display-name>
@@ -349,6 +363,7 @@
   </channel>
   <channel id="NickMusic.lat">
     <display-name>Nick Music</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/NickMusic_logo.svg/512px-NickMusic_logo.svg.png" />
   </channel>
   <channel id="NuestraTele.co">
     <display-name>Nuestra Tele</display-name>
@@ -358,9 +373,11 @@
   </channel>
   <channel id="Panamericana.pe">
     <display-name>Panamericana</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Panamericana_Televisi%C3%B3n_logo.svg/512px-Panamericana_Televisi%C3%B3n_logo.svg.png" />
   </channel>
   <channel id="Pasiones.lat">
     <display-name>Pasiones HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pasiones_TV_logo.svg/512px-Pasiones_TV_logo.svg.png" />
   </channel>
   <channel id="PlimPlim.ar">
     <display-name>Plim Plim TV</display-name>
@@ -374,6 +391,7 @@
   </channel>
   <channel id="RPP.pe">
     <display-name>RPP</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/RPP_logo.svg/512px-RPP_logo.svg.png" />
   </channel>
   <channel id="SomosTV.ve">
     <display-name>Somos TV Venezuela</display-name>
@@ -399,12 +417,14 @@
   </channel>
   <channel id="Space.lat">
     <display-name>Space HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Space_logo_2015.svg/512px-Space_logo_2015.svg.png" />
   </channel>
   <channel id="StingrayConcerts.lat">
     <display-name>Stingray Concerts HD</display-name>
   </channel>
   <channel id="StudioUniversal.lat">
     <display-name>Studio Universal HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Studio_Universal_logo.svg/512px-Studio_Universal_logo.svg.png" />
   </channel>
   <channel id="TCM.lat">
     <display-name>TCM</display-name>
@@ -434,6 +454,7 @@
   </channel>
   <channel id="TVPeru.pe">
     <display-name>TV Perú</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/TV_Per%C3%BA_logo.svg/512px-TV_Per%C3%BA_logo.svg.png" />
   </channel>
   <channel id="TVE.es">
     <display-name>TVE</display-name>
@@ -444,6 +465,7 @@
   </channel>
   <channel id="TeenNick.lat">
     <display-name>TeenNick</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/TeenNick_logo_2009.svg/512px-TeenNick_logo.svg.png" />
   </channel>
   <channel id="Telefe.ar">
     <display-name>Telefé</display-name>
@@ -455,9 +477,11 @@
   </channel>
   <channel id="Tlnovelas.mx">
     <display-name>Tlnovelas</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Tlnovelas_logo.svg/512px-Tlnovelas_logo.svg.png" />
   </channel>
   <channel id="Tooncast.lat">
     <display-name>Tooncast</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Tooncast_logo.svg/512px-Tooncast_logo.svg.png" />
   </channel>
   <channel id="UFC.us">
     <display-name>UFC</display-name>
@@ -487,6 +511,7 @@
   </channel>
   <channel id="Willax.pe">
     <display-name>Willax</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Willax_Televisi%C3%B3n_logo.svg/512px-Willax_Televisi%C3%B3n_logo.svg.png" />
   </channel>
   <channel id="FibMusic.lat">
     <display-name>Fib Music</display-name>
@@ -509,20 +534,595 @@
   </channel>
   <channel id="CanalI.ve">
     <display-name>Canal I</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Canal_i_%28Venezuela%29_logo.svg/512px-Canal_i_%28Venezuela%29_logo.svg.png" />
   </channel>
   <channel id="Globovision.ve">
     <display-name>Globovisión</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Globovisi%C3%B3n_logo.svg/512px-Globovisi%C3%B3n_logo.svg.png" />
   </channel>
   <channel id="TLT.ve">
     <display-name>TLT</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/La_Tele_Tuya_logo.svg/512px-La_Tele_Tuya_logo.svg.png" />
   </channel>
   <channel id="Venevision.ve">
     <display-name>Venevisión</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Venevisi%C3%B3n_logo.svg/512px-Venevisi%C3%B3n_logo.svg.png" />
   </channel>
-  <channel id="Meridiano.ve">
-    <display-name>Meridiano</display-name>
-  </channel>
-  <channel id="Meridiano2.ve">
-    <display-name>Meridiano 2</display-name>
-  </channel>
+
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="AE.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para A&amp;E HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="AMC.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para AMC.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="AMCHD.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para AMC HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ATV.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ATV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="AXN.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para AXN HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="AdultSwim.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Adult Swim.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="AmericaTV.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para América TV HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="AnimalPlanet.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Animal Planet HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="BBCNews.uk">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para BBC News.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="BethelTV.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Bethel TV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="BabyTV.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Baby TV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="CHV.cl">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para CHV HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="CNNespanol.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para CNN Español.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="CNNintl.uk">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para CNN International.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="CanalN.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Canal N.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="CartoonNetwork.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Cartoon Network HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Cartoonito.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Cartoonito.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Cinecanal.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Cinecanal HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Cinemax.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Cinemax.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ComedyCentral.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Comedy Central HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Daystar.us">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Daystar.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DWespanol.de">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para DW Español.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DePelicula.mx">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para De Película.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DirecTV.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para DirecTV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DSports.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para DSports.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DiscoveryChannel.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Discovery Channel HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DiscoveryKids.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Discovery Kids HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DiscoveryTheater.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Discovery Theater HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DisneyChannel.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Disney HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DisneyJunior.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Disney Junior.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DistritoComedia.mx">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Distrito Comedia.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="E.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para E! Entertainment TV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPN2.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN 2 HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPN2b.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN 2 HD (Op 2).</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPN3.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN 3 HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPN4.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN 4 HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPN5.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN 5 HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPN6.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN 6 HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPN7.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN 7 HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPN.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPNb.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN HD (Op 2).</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPNc.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN HD (Op 3).</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ESPNPremium.ar">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ESPN Premium HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="EWTN.us">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para EWTN.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ElGourmet.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para El Gourmet HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Enlace.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Enlace.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="EuropaEuropa.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Europa Europa.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ExitosaTV.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Exitosa TV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FMHFamily.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para FMH Family.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FMHFamilyKids.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para FMH Family Kids.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FMHFamilyMovie.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para FMH Family Movie.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FoxSportsPremium.ar">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Fox Sports Premium.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FX.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para FX HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FilmArts.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Film&amp;Arts.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FilmArtsb.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Film&amp;Arts (Op 2).</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FoodNetwork.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Food Network.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="France24.fr">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para France 24.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Global.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Global TV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="GoldenEdge.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Golden Edge.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Golden.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Golden HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="HBOFamily.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para HBO Family HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="HBO.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para HBO HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="HBOMundi.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para HBO Mundi.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="HBOPlus.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para HBO Plus.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="HBOSignature.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para HBO Signature.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="HBOExtreme.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para HBO Xtreme HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="HTV.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para HTV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="HTVb.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para HTV (Op 2).</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="History2.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para History 2.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="History.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para History Channel HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="HomeHealth.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Home &amp; Health HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ID.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para ID HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Karibena.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Karibeña.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="KanalDDrama.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Kanal D Drama.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="L1.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para L1.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="L1Max.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para L1 MAX.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="LaRed.cl">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para La Red.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="LasEstrellas.mx">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Las Estrellas HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Latina.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Latina HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Lifetime.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Lifetime.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="LoveNature.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Love Nature.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Mega.cl">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para MEGA HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="MiMusicaHits.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Mi Música Hits.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="MiMusicaPeru.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Mi Música Perú.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="MTV.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para MTV HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="MundoMusica.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Mundo de la Música.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="MusicaVene.ve">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Música Vene.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Megab.cl">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Mega (Op 2).</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="MovistarDeportes.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Movistar Deportes.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="NuevoTiempo.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Nuevo Tiempo.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="NatGeo.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Nat Geo HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Nick.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Nick HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="NickJr.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Nick Jr..</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="NickMusic.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Nick Music.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="NuestraTele.co">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Nuestra Tele.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="OromarTV.ec">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Oromar TV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Panamericana.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Panamericana.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Pasiones.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Pasiones HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="PlimPlim.ar">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Plim Plim TV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="RAIItalia.it">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para RAI Italia.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="RECTV.cl">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para REC TV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="RPP.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para RPP.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="SomosTV.ve">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Somos TV Venezuela.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="StarChannel.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Star Channel.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="StarChannelHD.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Star Channel HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Sextreme.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Sextreme.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Sony.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Sony HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="SonyMovies.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Sony Movies HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Space.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Space HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="StingrayConcerts.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Stingray Concerts HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="StudioUniversal.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Studio Universal HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TCM.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TCM.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TNT.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TNT HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TNTNovelas.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TNT Novelas HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TNTSeries.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TNT Series HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TNTSportsPremium.ar">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TNT Sports Premium HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TopLatino.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Top Latino.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TVAragua.ve">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TV Aragua.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TVPeru.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TV Perú.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TVE.es">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TVE.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TVSMaracay.ve">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TVS Maracay.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TeenNick.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TeenNick.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Telefe.ar">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Telefé.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Telemundo.us">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Telemundo.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Tlnovelas.mx">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Tlnovelas.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Tooncast.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Tooncast.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="UFC.us">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para UFC.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="UniversalChannel.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Universal Channel HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="USA.us">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para USA Network.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="VisionMusica.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Visión Música.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="ViaXEsports.cl">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Vía X Esports.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="WarnerChannel.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Warner Channel.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="WarnerChannelHD.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Warner Channel HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Willax.pe">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Willax.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FibMusic.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Fib Music.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="FibPeliculas.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Fib Películas.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="VclassicMusica.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para VClassic Música.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="WestTV.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para West TV.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="DSportsOp3.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para DSports (Opción 3).</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TVO.es">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TVO.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="CanalI.ve">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Canal I.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Globovision.ve">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Globovisión.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="TLT.ve">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para TLT.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127120000 -0400" channel="Venevision.ve">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Venevisión.</desc>
+  </programme>
 </tv>
