@@ -6,11 +6,20 @@ import unicodedata
 import xml.etree.ElementTree as ET
 import requests
 
-# Pon aquí las URLs de EPG que ya sabes que funcionan (las tuyas o feeds XML/XML.GZ activos)
 EPG_SOURCES = [
-    # "https://epgshare01.online/epgshare01/epg_ripper_ALL_SOURCES1.xml.gz",
-    # "https://iptv-epg.org/files/epg-mx.xml.gz",
-    # "
+    "https://iptv-epg.org/files/epg-pe.xml.gz",
+    "https://iptv-epg.org/files/epg-cl.xml.gz",
+    "https://iptv-epg.org/files/epg-ve.xml.gz",
+    "https://iptv-epg.org/files/epg-mx.xml.gz",
+    "https://iptv-epg.org/files/epg-co.xml.gz",
+    "https://iptv-epg.org/files/epg-ar.xml.gz",
+    "https://iptv-epg.org/files/epg-ec.xml.gz",
+    "https://iptv-epg.org/files/epg-us.xml.gz",
+    "https://iptv-epg.org/files/epg-es.xml.gz",
+    "https://iptv-epg.org/files/epg-uk.xml.gz",
+    "https://iptv-epg.org/files/epg-fr.xml.gz",
+    "https://iptv-epg.org/files/epg-de.xml.gz",
+    "https://iptv-epg.org/files/epg-it.xml.gz",
 ]
 
 # tvg-id -> (nombre visible, logo_url, keywords de búsqueda)
@@ -44,7 +53,7 @@ CHANNELS = {
     "DiscoveryKids.lat": ("Discovery Kids", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Discovery_Kids_2016.svg/512px-Discovery_Kids_2016.svg.png", ["discovery kids"]),
     "DiscoveryTheater.lat": ("Discovery Theater", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Discovery_Channel_%282019%29.svg/512px-Discovery_Channel_%282019%29.svg.png", ["discovery theater", "discovery turbo"]),
     "DisneyChannel.lat": ("Disney Channel", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Disney_Channel_logo_%282014%29.svg/512px-Disney_Channel_logo_%282014%29.svg.png", ["disney channel", "disney"]),
-    "DisneyJunior.lat": ("Disney Junior", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Disney_Junior_logo_2014.svg/512px-Disney_Junior_logo_2014.svg.png", ["disney junior"]),
+    "DisneyJunior.lat": ("Disney Junior", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Disney_Junior_logo_2014.svg/512px-Disney_Junior_logo.svg.png", ["disney junior"]),
     "DistritoComedia.mx": ("Distrito Comedia", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Distrito_Comedia_logo.svg/512px-Distrito_Comedia_logo.svg.png", ["distrito comedia"]),
     "E.lat": ("E! Entertainment TV", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/E%21_logo_2012.svg/512px-E%21_logo_2012.svg.png", ["e entertainment", "e! entertainment"]),
     "ESPN2.lat": ("ESPN 2", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/512px-ESPN2_logo.svg.png", ["espn 2", "espn2"]),
@@ -136,7 +145,7 @@ CHANNELS = {
     "TVPeru.pe": ("TV Perú", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/TV_Per%C3%BA_logo.svg/512px-TV_Per%C3%BA_logo.svg.png", ["tv peru"]),
     "TVE.es": ("TVE", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/TVE_logo.svg/512px-TVE_logo.svg.png", ["tve"]),
     "TVSMaracay.ve": ("TVS Maracay", "", ["tvs maracay"]),
-    "TeenNick.lat": ("TeenNick", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/TeenNick_logo_2009.svg/512px-TeenNick_logo.svg.png", ["teen nick", "teennick"]),
+    "TeenNick.lat": ("TeenNick", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/TeenNick_logo_2009.svg/512px-TeenNick_logo_2009.svg.png", ["teen nick", "teennick"]),
     "Telefe.ar": ("Telefé", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Telefe_logo_2022.svg/512px-Telefe_logo_2022.svg.png", ["telefe"]),
     "Telemundo.us": ("Telemundo", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Telemundo_logo_2018.svg/512px-Telemundo_logo_2018.svg.png", ["telemundo"]),
     "Tlnovelas.mx": ("Tlnovelas", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Tlnovelas_logo.svg/512px-Tlnovelas_logo.svg.png", ["tlnovelas"]),
@@ -168,7 +177,7 @@ def norm(text):
 
 
 def open_stream(url):
-    headers = {"User-Agent": "Mozilla/5.0 (iptv-epg-builder/3.0)"}
+    headers = {"User-Agent": "Mozilla/5.0 (iptv-epg-builder/4.0)"}
     r = requests.get(url, headers=headers, timeout=60, stream=True)
     r.raise_for_status()
     raw_bytes = io.BytesIO(r.content)
@@ -200,7 +209,6 @@ def find_best_channel_match(tvg_id, keywords, source_channels):
 
 def build_epg():
     root = ET.Element("tv", attrib={"generator-info-name": "miguelrojas696-iptv-epg"})
-    channel_elements = {}
 
     for tvg_id, (display_name, logo_url, _) in CHANNELS.items():
         ch_el = ET.SubElement(root, "channel", attrib={"id": tvg_id})
@@ -208,7 +216,6 @@ def build_epg():
         dn.text = display_name
         if logo_url:
             ET.SubElement(ch_el, "icon", attrib={"src": logo_url})
-        channel_elements[tvg_id] = ch_el
 
     matched_counts = {tvg_id: 0 for tvg_id in CHANNELS}
 
@@ -216,7 +223,6 @@ def build_epg():
         try:
             stream = open_stream(url)
             source_channels = {}
-            target_cids = set()
 
             for event, elem in ET.iterparse(stream, events=("end",)):
                 if elem.tag == "channel":
@@ -233,9 +239,7 @@ def build_epg():
                 best_cid = find_best_channel_match(tvg_id, keywords, source_channels)
                 if best_cid:
                     cid_to_tvg[best_cid] = tvg_id
-                    target_cids.add(best_cid)
 
-            stream.seek(0)
             stream = open_stream(url)
             for event, elem in ET.iterparse(stream, events=("end",)):
                 if elem.tag == "programme":
@@ -253,7 +257,7 @@ def build_epg():
                     elem.clear()
 
             print(f"[FUENTE OK] {url} -> {len(cid_to_tvg)} canales emparejados")
-            del source_channels, cid_to_tvg, target_cids
+            del source_channels, cid_to_tvg
             gc.collect()
         except Exception as e:
             print(f"[AVISO FUENTE] {url}: {e}")
