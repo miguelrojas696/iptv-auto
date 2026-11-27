@@ -132,7 +132,7 @@ CHANNELS = {
     "TVPeru.pe": ("TV Perú", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/TV_Per%C3%BA_logo.svg/512px-TV_Per%C3%BA_logo.svg.png", ["tv peru"]),
     "TVE.es": ("TVE", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/TVE_logo.svg/512px-TVE_logo.svg.png", ["tve"]),
     "TVSMaracay.ve": ("TVS Maracay", "", ["tvs maracay"]),
-    "TeenNick.lat": ("TeenNick", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/TeenNick_logo_2009.svg/512px-TeenNick_logo.svg.png", ["teen nick", "teennick"]),
+    "TeenNick.lat": ("TeenNick", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/TeenNick_logo_2009.svg/512px-TeenNick_logo_2009.svg.png", ["teen nick", "teennick"]),
     "Telefe.ar": ("Telefé", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Telefe_logo_2022.svg/512px-Telefe_logo_2022.svg.png", ["telefe"]),
     "Telemundo.us": ("Telemundo", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Telemundo_logo_2018.svg/512px-Telemundo_logo_2018.svg.png", ["telemundo"]),
     "Tlnovelas.mx": ("Tlnovelas", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Tlnovelas_logo.svg/512px-Tlnovelas_logo.svg.png", ["tlnovelas"]),
@@ -157,15 +157,40 @@ CHANNELS = {
     "Venevision.ve": ("Venevisión", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Venevisi%C3%B3n_logo.svg/512px-Venevisi%C3%B3n_logo.svg.png", ["venevision"]),
 }
 
+
 def norm(text):
     text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
     return re.sub(r"[^a-z0-9 ]+", " ", text.lower()).strip()
 
+
 def fetch_xml(url):
-    r = requests.get(url, timeout=30)
+    headers = {"User-Agent": "Mozilla/5.0 (iptv-epg-builder/1.0)"}
+    r = requests.get(url, headers=headers, timeout=45)
     r.raise_for_status()
     data = gzip.decompress(r.content) if url.endswith(".gz") else r.content
     return ET.fromstring(data)
+
+
+def find_best_channel_match(keywords, source_channels):
+    norm_keywords = [norm(kw) for kw in keywords if norm(kw)]
+    if not norm_keywords:
+        return None
+
+    # 1. Coincidencia exacta con algún display-name normalizado
+    for kw in norm_keywords:
+        for cid, names in source_channels.items():
+            if kw in names:
+                return cid
+
+    # 2. Coincidencia por palabra/frase completa usando límites de palabra
+    for kw in norm_keywords:
+        pattern = re.compile(rf"(?:^|\s){re.escape(kw)}(?:\s|$)")
+        for cid, names in source_channels.items():
+            if any(pattern.search(n) for n in names):
+                return cid
+
+    return None
+
 
 def add_fallback_programme(root, tvg_id, display_name):
     tz_ve = timezone(timedelta(hours=-4))
@@ -182,6 +207,7 @@ def add_fallback_programme(root, tvg_id, display_name):
     title_el.text = "Programación en emisión"
     desc_el = ET.SubElement(prog, "desc", attrib={"lang": "es"})
     desc_el.text = f"Guía activa para {display_name}."
+
 
 def build_epg():
     root = ET.Element("tv", attrib={"generator-info-name": "miguelrojas696-iptv-epg"})
@@ -200,8 +226,12 @@ def build_epg():
                 cid = prog.attrib.get("channel", "")
                 if cid:
                     source_programmes.setdefault(cid, []).append(prog)
+            print(f"Fuente cargada: {url} ({len(source_channels)} canales)")
         except Exception as e:
             print(f"Aviso con fuente {url}: {e}")
+
+    matched_total = 0
+    fallback_total = 0
 
     for tvg_id, (display_name, logo_url, keywords) in CHANNELS.items():
         ch_el = ET.SubElement(root, "channel", attrib={"id": tvg_id})
@@ -210,13 +240,9 @@ def build_epg():
         if logo_url:
             ET.SubElement(ch_el, "icon", attrib={"src": logo_url})
 
-        matched_cid = None
-        for cid, names in source_channels.items():
-            if any(kw == n or kw in n for kw in keywords for n in names):
-                matched_cid = cid
-                break
-
+        matched_cid = find_best_channel_match(keywords, source_channels)
         added_count = 0
+
         if matched_cid and matched_cid in source_programmes:
             for p in source_programmes[matched_cid]:
                 new_p = ET.SubElement(root, "programme", attrib={
@@ -228,13 +254,19 @@ def build_epg():
                     new_p.append(child)
                 added_count += 1
 
-        if added_count == 0:
+        if added_count > 0:
+            matched_total += 1
+            print(f"[OK] {tvg_id} -> {matched_cid} ({added_count} programas)")
+        else:
+            fallback_total += 1
             add_fallback_programme(root, tvg_id, display_name)
+            print(f"[RESPALDO] {tvg_id} ({display_name}) sin programas en fuente")
 
     tree = ET.ElementTree(root)
     ET.indent(tree, space="  ")
     tree.write("epg.xml", encoding="utf-8", xml_declaration=True)
-    print("epg.xml generado correctamente.")
+    print(f"epg.xml generado: {matched_total} con guía real, {fallback_total} con respaldo.")
+
 
 if __name__ == "__main__":
     build_epg()
