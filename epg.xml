@@ -397,11 +397,7 @@
     <display-name>Somos TV Venezuela</display-name>
   </channel>
   <channel id="StarChannel.lat">
-    <display-name>Star Channel</display-name>
-    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png" />
-  </channel>
-  <channel id="StarChannelHD.lat">
-    <display-name>Star Channel (Op 2)</display-name>
+    <display-name>Star Channel HD</display-name>
     <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png" />
   </channel>
   <channel id="Sextreme.lat">
