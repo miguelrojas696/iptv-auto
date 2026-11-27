@@ -1,18 +1,15 @@
+import gc
 import gzip
 import io
 import re
 import unicodedata
 import xml.etree.ElementTree as ET
-from datetime import datetime, timedelta, timezone
 import requests
 
+# Pon aquí las URLs de EPG que ya sabes que funcionan (las tuyas o feeds XML/XML.GZ activos)
 EPG_SOURCES = [
-    "https://raw.githubusercontent.com/acidjesuz/EPG/master/guide.xml",
-    "https://epgshare01.online/epgshare01/epg_ripper_LATAM1.xml.gz",
-    "https://epgshare01.online/epgshare01/epg_ripper_ALL_SOURCES1.xml.gz",
-    "https://iptv-org.github.io/epg/guides/pe/guide.xml",
-    "https://iptv-org.github.io/epg/guides/cl/guide.xml",
-    "https://iptv-org.github.io/epg/guides/ve/guide.xml",
+    # "https://TU-FUENTE-EPG-1.xml",
+    # "https://TU-FUENTE-EPG-2.xml.gz",
 ]
 
 # tvg-id -> (nombre visible, logo_url, keywords de búsqueda)
@@ -121,7 +118,7 @@ CHANNELS = {
     "RPP.pe": ("RPP", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/RPP_logo.svg/512px-RPP_logo.svg.png", ["rpp"]),
     "SomosTV.ve": ("Somos TV Venezuela", "", ["somos tv"]),
     "StarChannel.lat": ("Star Channel", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png", ["star channel"]),
-    "StarChannel.lat": ("Star Channel HD", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png", ["star channel"]),
+    "StarChannelHD.lat": ("Star Channel (Op 2)", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png", ["star channel"]),
     "Sextreme.lat": ("Sextreme", "", ["sextreme"]),
     "Sony.lat": ("Sony", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Sony_Channel_logo.svg/512px-Sony_Channel_logo.svg.png", ["sony channel", "sony"]),
     "SonyMovies.lat": ("Sony Movies", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Sony_Channel_logo.svg/512px-Sony_Channel_logo.svg.png", ["sony movies"]),
@@ -169,17 +166,16 @@ def norm(text):
     return re.sub(r"[^a-z0-9 ]+", " ", text.lower()).strip()
 
 
-def fetch_xml(url):
-    headers = {"User-Agent": "Mozilla/5.0 (iptv-epg-builder/2.0)"}
-    r = requests.get(url, headers=headers, timeout=60)
+def open_stream(url):
+    headers = {"User-Agent": "Mozilla/5.0 (iptv-epg-builder/3.0)"}
+    r = requests.get(url, headers=headers, timeout=60, stream=True)
     r.raise_for_status()
-    content = r.content
-    if url.endswith(".gz") or content[:2] == b"\x1f\x8b":
-        with gzip.GzipFile(fileobj=io.BytesIO(content)) as gz:
-            data = gz.read()
-    else:
-        data = content
-    return ET.fromstring(data)
+    raw_bytes = io.BytesIO(r.content)
+    header = raw_bytes.getbuffer()[:2]
+    raw_bytes.seek(0)
+    if url.endswith(".gz") or bytes(header) == b"\x1f\x8b":
+        return gzip.GzipFile(fileobj=raw_bytes)
+    return raw_bytes
 
 
 def find_best_channel_match(tvg_id, keywords, source_channels):
@@ -187,13 +183,11 @@ def find_best_channel_match(tvg_id, keywords, source_channels):
     norm_keywords = [norm(kw) for kw in keywords if norm(kw)]
     candidates = ([norm_id] if norm_id else []) + norm_keywords
 
-    # 1. Coincidencia exacta con algún display-name normalizado
     for kw in candidates:
         for cid, names in source_channels.items():
             if kw in names:
                 return cid
 
-    # 2. Coincidencia por palabra/frase completa usando límites de palabra
     for kw in candidates:
         pattern = re.compile(rf"(?:^|\s){re.escape(kw)}(?:\s|$)")
         for cid, names in source_channels.items():
@@ -205,62 +199,76 @@ def find_best_channel_match(tvg_id, keywords, source_channels):
 
 def build_epg():
     root = ET.Element("tv", attrib={"generator-info-name": "miguelrojas696-iptv-epg"})
-    source_channels = {}
-    source_programmes = {}
+    channel_elements = {}
 
-    for url in EPG_SOURCES:
-        try:
-            src = fetch_xml(url)
-            loaded_ch = 0
-            for ch in src.findall("channel"):
-                cid = ch.attrib.get("id", "").strip()
-                names = [norm(d.text) for d in ch.findall("display-name") if d.text]
-                if cid and cid not in source_channels:
-                    source_channels[cid] = names
-                    loaded_ch += 1
-            for prog in src.findall("programme"):
-                cid = prog.attrib.get("channel", "").strip()
-                if cid:
-                    source_programmes.setdefault(cid, []).append(prog)
-            print(f"[FUENTE OK] {url} -> {loaded_ch} canales nuevos")
-        except Exception as e:
-            print(f"[AVISO FUENTE] {url}: {e}")
-
-    matched_total = 0
-    unmatched_total = 0
-
-    for tvg_id, (display_name, logo_url, keywords) in CHANNELS.items():
+    for tvg_id, (display_name, logo_url, _) in CHANNELS.items():
         ch_el = ET.SubElement(root, "channel", attrib={"id": tvg_id})
         dn = ET.SubElement(ch_el, "display-name")
         dn.text = display_name
         if logo_url:
             ET.SubElement(ch_el, "icon", attrib={"src": logo_url})
+        channel_elements[tvg_id] = ch_el
 
-        matched_cid = find_best_channel_match(tvg_id, keywords, source_channels)
-        added_count = 0
+    matched_counts = {tvg_id: 0 for tvg_id in CHANNELS}
 
-        if matched_cid and matched_cid in source_programmes:
-            for p in source_programmes[matched_cid]:
-                new_p = ET.SubElement(root, "programme", attrib={
-                    "start": p.attrib.get("start", ""),
-                    "stop": p.attrib.get("stop", ""),
-                    "channel": tvg_id,
-                })
-                for child in p:
-                    new_p.append(child)
-                added_count += 1
+    for url in EPG_SOURCES:
+        try:
+            stream = open_stream(url)
+            source_channels = {}
+            target_cids = set()
 
-        if added_count > 0:
+            for event, elem in ET.iterparse(stream, events=("end",)):
+                if elem.tag == "channel":
+                    cid = elem.attrib.get("id", "").strip()
+                    names = [norm(d.text) for d in elem.findall("display-name") if d.text]
+                    if cid:
+                        source_channels[cid] = names
+                    elem.clear()
+                elif elem.tag == "programme":
+                    break
+
+            cid_to_tvg = {}
+            for tvg_id, (_, _, keywords) in CHANNELS.items():
+                best_cid = find_best_channel_match(tvg_id, keywords, source_channels)
+                if best_cid:
+                    cid_to_tvg[best_cid] = tvg_id
+                    target_cids.add(best_cid)
+
+            stream.seek(0)
+            stream = open_stream(url)
+            for event, elem in ET.iterparse(stream, events=("end",)):
+                if elem.tag == "programme":
+                    cid = elem.attrib.get("channel", "").strip()
+                    if cid in cid_to_tvg:
+                        tvg_id = cid_to_tvg[cid]
+                        new_p = ET.SubElement(root, "programme", attrib={
+                            "start": elem.attrib.get("start", ""),
+                            "stop": elem.attrib.get("stop", ""),
+                            "channel": tvg_id,
+                        })
+                        for child in elem:
+                            new_p.append(child)
+                        matched_counts[tvg_id] += 1
+                    elem.clear()
+
+            print(f"[FUENTE OK] {url} -> {len(cid_to_tvg)} canales emparejados")
+            del source_channels, cid_to_tvg, target_cids
+            gc.collect()
+        except Exception as e:
+            print(f"[AVISO FUENTE] {url}: {e}")
+
+    matched_total = 0
+    for tvg_id, (display_name, _, _) in CHANNELS.items():
+        if matched_counts[tvg_id] > 0:
             matched_total += 1
-            print(f"[OK] {tvg_id} -> {matched_cid} ({added_count} programas)")
+            print(f"[OK] {tvg_id} ({matched_counts[tvg_id]} programas)")
         else:
-            unmatched_total += 1
             print(f"[SIN GUIA] {tvg_id} ({display_name}) sin programas en fuentes")
 
     tree = ET.ElementTree(root)
     ET.indent(tree, space="  ")
     tree.write("epg.xml", encoding="utf-8", xml_declaration=True)
-    print(f"epg.xml generado: {matched_total} con guía real, {unmatched_total} sin guía.")
+    print(f"epg.xml generado: {matched_total} con guía real, {len(CHANNELS) - matched_total} sin guía.")
 
 
 if __name__ == "__main__":
