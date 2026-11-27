@@ -8,7 +8,7 @@ import requests
 
 # Pon aquí las URLs de EPG que ya sabes que funcionan (las tuyas o feeds XML/XML.GZ activos)
 EPG_SOURCES = [
-    # "https://TU-FUENTE-EPG-1.xml",
+    # "https://epgshare01.online/epgshare01/epg_ripper_ALL_SOURCES1.xml.gz",
     # "https://TU-FUENTE-EPG-2.xml.gz",
 ]
 
