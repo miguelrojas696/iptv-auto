@@ -20,7 +20,6 @@ EPG_SOURCES = [
     "https://iptv-epg.org/files/epg-fr.xml.gz",
     "https://iptv-epg.org/files/epg-de.xml.gz",
     "https://iptv-epg.org/files/epg-it.xml.gz",
-    "https://epgshare01.online/epgshare01/epg_ripper_ALL_SOURCES1.xml.gz",
 ]
 
 # tvg-id -> (nombre visible, logo_url, keywords de búsqueda)
