@@ -519,10 +519,4 @@
   <channel id="Venevision.ve">
     <display-name>Venevisión</display-name>
   </channel>
-  <channel id="Meridiano.ve">
-    <display-name>Meridiano</display-name>
-  </channel>
-  <channel id="Meridiano2.ve">
-    <display-name>Meridiano 2</display-name>
-  </channel>
 </tv>
