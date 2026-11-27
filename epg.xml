@@ -525,4 +525,560 @@
   <channel id="Meridiano2.ve">
     <display-name>Meridiano 2</display-name>
   </channel>
+  <?xml version='1.0' encoding='utf-8'?>
+<tv generator-info-name="miguelrojas696-iptv-epg">
+  <channel id="AE.lat">
+    <display-name>A&amp;E HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A%26E_Network_logo.svg/512px-A%26E_Network_logo.svg.png" />
+  </channel>
+  <channel id="AMC.lat">
+    <display-name>AMC</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/AMC_logo_2019.svg/512px-AMC_logo_2019.svg.png" />
+  </channel>
+  <channel id="AMCHD.lat">
+    <display-name>AMC HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/AMC_logo_2019.svg/512px-AMC_logo_2019.svg.png" />
+  </channel>
+  <channel id="ATV.pe">
+    <display-name>ATV</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/ATV_Per%C3%BA_logo.svg/512px-ATV_Per%C3%BA_logo.svg.png" />
+  </channel>
+  <channel id="AXN.lat">
+    <display-name>AXN HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/AXN_logo_2023.svg/512px-AXN_logo_2023.svg.png" />
+  </channel>
+  <channel id="AdultSwim.lat">
+    <display-name>Adult Swim</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Adult_Swim_2023_logo.svg/512px-Adult_Swim_2023_logo.svg.png" />
+  </channel>
+  <channel id="AmericaTV.pe">
+    <display-name>América TV HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Am%C3%A9rica_Televisi%C3%B3n_logo.svg/512px-Am%C3%A9rica_Televisi%C3%B3n_logo.svg.png" />
+  </channel>
+  <channel id="AnimalPlanet.lat">
+    <display-name>Animal Planet HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Animal_Planet_logo.svg/512px-Animal_Planet_logo.svg.png" />
+  </channel>
+  <channel id="BBCNews.uk">
+    <display-name>BBC News</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/BBC_News_2022_%28icon%29.svg/512px-BBC_News_2022_%28icon%29.svg.png" />
+  </channel>
+  <channel id="BethelTV.pe">
+    <display-name>Bethel TV</display-name>
+  </channel>
+  <channel id="BabyTV.lat">
+    <display-name>Baby TV</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/BabyTV_logo.svg/512px-BabyTV_logo.svg.png" />
+  </channel>
+  <channel id="CHV.cl">
+    <display-name>CHV HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Chilevisi%C3%B3n_2020.svg/512px-Chilevisi%C3%B3n_2020.svg.png" />
+  </channel>
+  <channel id="CNNespanol.lat">
+    <display-name>CNN Español</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/CNN_International_logo.svg/512px-CNN_International_logo.svg.png" />
+  </channel>
+  <channel id="CNNintl.uk">
+    <display-name>CNN International</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/CNN_International_logo.svg/512px-CNN_International_logo.svg.png" />
+  </channel>
+  <channel id="CanalN.pe">
+    <display-name>Canal N</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Canal_N_logo.svg/512px-Canal_N_logo.svg.png" />
+  </channel>
+  <channel id="CartoonNetwork.lat">
+    <display-name>Cartoon Network HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Cartoon_Network_2010_logo.svg/512px-Cartoon_Network_2010_logo.svg.png" />
+  </channel>
+  <channel id="Cartoonito.lat">
+    <display-name>Cartoonito</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Cartoonito_2021_logo.svg/512px-Cartoonito_2021_logo.svg.png" />
+  </channel>
+  <channel id="Cinecanal.lat">
+    <display-name>Cinecanal HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Cinecanal_logo.svg/512px-Cinecanal_logo.svg.png" />
+  </channel>
+  <channel id="Cinemax.lat">
+    <display-name>Cinemax</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Cinemax_logo.svg/512px-Cinemax_logo.svg.png" />
+  </channel>
+  <channel id="ComedyCentral.lat">
+    <display-name>Comedy Central HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/512px-Comedy_Central_2018.svg.png" />
+  </channel>
+  <channel id="Daystar.us">
+    <display-name>Daystar</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Daystar_Television_Network_logo.svg/512px-Daystar_Television_Network_logo.svg.png" />
+  </channel>
+  <channel id="DWespanol.de">
+    <display-name>DW Español</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deutsche_Welle_symbol_2012.svg/512px-Deutsche_Welle_symbol_2012.svg.png" />
+  </channel>
+  <channel id="DePelicula.mx">
+    <display-name>De Película</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/De_Pel%C3%ADcula_logo.svg/512px-De_Pel%C3%ADcula_logo.svg.png" />
+  </channel>
+  <channel id="DirecTV.lat">
+    <display-name>DirecTV</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/DirecTV_logo_2019.svg/512px-DirecTV_logo_2019.svg.png" />
+  </channel>
+  <channel id="DSports.lat">
+    <display-name>DSports</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/DSports_logo.svg/512px-DSports_logo.svg.png" />
+  </channel>
+  <channel id="DiscoveryChannel.lat">
+    <display-name>Discovery Channel HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Discovery_Channel_%282019%29.svg/512px-Discovery_Channel_%282019%29.svg.png" />
+  </channel>
+  <channel id="DiscoveryKids.lat">
+    <display-name>Discovery Kids HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Discovery_Kids_2016.svg/512px-Discovery_Kids_2016.svg.png" />
+  </channel>
+  <channel id="DiscoveryTheater.lat">
+    <display-name>Discovery Theater HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Discovery_Channel_%282019%29.svg/512px-Discovery_Channel_%282019%29.svg.png" />
+  </channel>
+  <channel id="DisneyChannel.lat">
+    <display-name>Disney HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Disney_Channel_logo_%282014%29.svg/512px-Disney_Channel_logo_%282014%29.svg.png" />
+  </channel>
+  <channel id="DisneyJunior.lat">
+    <display-name>Disney Junior</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Disney_Junior_logo_2014.svg/512px-Disney_Junior_logo_2014.svg.png" />
+  </channel>
+  <channel id="DistritoComedia.mx">
+    <display-name>Distrito Comedia</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Distrito_Comedia_logo.svg/512px-Distrito_Comedia_logo.svg.png" />
+  </channel>
+  <channel id="E.lat">
+    <display-name>E! Entertainment TV</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/E%21_logo_2012.svg/512px-E%21_logo_2012.svg.png" />
+  </channel>
+  <channel id="ESPN2.lat">
+    <display-name>ESPN 2 HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/512px-ESPN2_logo.svg.png" />
+  </channel>
+  <channel id="ESPN2b.lat">
+    <display-name>ESPN 2 HD (Op 2)</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/512px-ESPN2_logo.svg.png" />
+  </channel>
+  <channel id="ESPN3.lat">
+    <display-name>ESPN 3 HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/ESPN3_logo.svg/512px-ESPN3_logo.svg.png" />
+  </channel>
+  <channel id="ESPN4.lat">
+    <display-name>ESPN 4 HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png" />
+  </channel>
+  <channel id="ESPN5.lat">
+    <display-name>ESPN 5 HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png" />
+  </channel>
+  <channel id="ESPN6.lat">
+    <display-name>ESPN 6 HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png" />
+  </channel>
+  <channel id="ESPN7.lat">
+    <display-name>ESPN 7 HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png" />
+  </channel>
+  <channel id="ESPN.lat">
+    <display-name>ESPN HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png" />
+  </channel>
+  <channel id="ESPNb.lat">
+    <display-name>ESPN HD (Op 2)</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png" />
+  </channel>
+  <channel id="ESPNc.lat">
+    <display-name>ESPN HD (Op 3)</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png" />
+  </channel>
+  <channel id="ESPNPremium.ar">
+    <display-name>ESPN Premium HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png" />
+  </channel>
+  <channel id="EWTN.us">
+    <display-name>EWTN</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/EWTN_logo.svg/512px-EWTN_logo.svg.png" />
+  </channel>
+  <channel id="ElGourmet.lat">
+    <display-name>El Gourmet HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/El_Gourmet_logo.svg/512px-El_Gourmet_logo.svg.png" />
+  </channel>
+  <channel id="Enlace.lat">
+    <display-name>Enlace</display-name>
+  </channel>
+  <channel id="EuropaEuropa.lat">
+    <display-name>Europa Europa</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Europa_Europa_logo.svg/512px-Europa_Europa_logo.svg.png" />
+  </channel>
+  <channel id="ExitosaTV.pe">
+    <display-name>Exitosa TV</display-name>
+  </channel>
+  <channel id="FMHFamily.lat">
+    <display-name>FMH Family</display-name>
+  </channel>
+  <channel id="FMHFamilyKids.lat">
+    <display-name>FMH Family Kids</display-name>
+  </channel>
+  <channel id="FMHFamilyMovie.lat">
+    <display-name>FMH Family Movie</display-name>
+  </channel>
+  <channel id="FoxSportsPremium.ar">
+    <display-name>Fox Sports Premium</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Fox_Sports_logo.svg/512px-Fox_Sports_logo.svg.png" />
+  </channel>
+  <channel id="FX.lat">
+    <display-name>FX HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/FX_logo.svg/512px-FX_logo.svg.png" />
+  </channel>
+  <channel id="FilmArts.lat">
+    <display-name>Film&amp;Arts</display-name>
+  </channel>
+  <channel id="FilmArtsb.lat">
+    <display-name>Film&amp;Arts (Op 2)</display-name>
+  </channel>
+  <channel id="FoodNetwork.lat">
+    <display-name>Food Network</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Food_Network_logo.svg/512px-Food_Network_logo.svg.png" />
+  </channel>
+  <channel id="France24.fr">
+    <display-name>France 24</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/France_24_logo.svg/512px-France_24_logo.svg.png" />
+  </channel>
+  <channel id="Global.pe">
+    <display-name>Global TV</display-name>
+  </channel>
+  <channel id="GoldenEdge.lat">
+    <display-name>Golden Edge</display-name>
+  </channel>
+  <channel id="Golden.lat">
+    <display-name>Golden HD</display-name>
+  </channel>
+  <channel id="HBOFamily.lat">
+    <display-name>HBO Family HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png" />
+  </channel>
+  <channel id="HBO.lat">
+    <display-name>HBO HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png" />
+  </channel>
+  <channel id="HBOMundi.lat">
+    <display-name>HBO Mundi</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png" />
+  </channel>
+  <channel id="HBOPlus.lat">
+    <display-name>HBO Plus</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png" />
+  </channel>
+  <channel id="HBOSignature.lat">
+    <display-name>HBO Signature</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png" />
+  </channel>
+  <channel id="HBOExtreme.lat">
+    <display-name>HBO Xtreme HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png" />
+  </channel>
+  <channel id="HTV.lat">
+    <display-name>HTV</display-name>
+  </channel>
+  <channel id="HTVb.lat">
+    <display-name>HTV (Op 2)</display-name>
+  </channel>
+  <channel id="History2.lat">
+    <display-name>History 2</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/History_Channel_logo.svg/512px-History_Channel_logo.svg.png" />
+  </channel>
+  <channel id="History.lat">
+    <display-name>History Channel HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/History_Channel_logo.svg/512px-History_Channel_logo.svg.png" />
+  </channel>
+  <channel id="HomeHealth.lat">
+    <display-name>Home &amp; Health HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Discovery_Home_%26_Health_logo.svg/512px-Discovery_Home_%26_Health_logo.svg.png" />
+  </channel>
+  <channel id="ID.lat">
+    <display-name>ID HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Investigation_Discovery_logo.svg/512px-Investigation_Discovery_logo.svg.png" />
+  </channel>
+  <channel id="Karibena.pe">
+    <display-name>Karibeña</display-name>
+  </channel>
+  <channel id="KanalDDrama.lat">
+    <display-name>Kanal D Drama</display-name>
+  </channel>
+  <channel id="L1.pe">
+    <display-name>L1</display-name>
+  </channel>
+  <channel id="L1Max.pe">
+    <display-name>L1 MAX</display-name>
+  </channel>
+  <channel id="LaRed.cl">
+    <display-name>La Red</display-name>
+  </channel>
+  <channel id="LasEstrellas.mx">
+    <display-name>Las Estrellas HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Las_Estrellas_logo.svg/512px-Las_Estrellas_logo.svg.png" />
+  </channel>
+  <channel id="Latina.pe">
+    <display-name>Latina HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Latina_Televisi%C3%B3n_logo.svg/512px-Latina_Televisi%C3%B3n_logo.svg.png" />
+  </channel>
+  <channel id="Lifetime.lat">
+    <display-name>Lifetime</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Lifetime_logo.svg/512px-Lifetime_logo.svg.png" />
+  </channel>
+  <channel id="LoveNature.lat">
+    <display-name>Love Nature</display-name>
+  </channel>
+  <channel id="Mega.cl">
+    <display-name>MEGA HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mega_%28Chile%29_logo.svg/512px-Mega_%28Chile%29_logo.svg.png" />
+  </channel>
+  <channel id="MiMusicaHits.lat">
+    <display-name>Mi Música Hits</display-name>
+  </channel>
+  <channel id="MiMusicaPeru.pe">
+    <display-name>Mi Música Perú</display-name>
+  </channel>
+  <channel id="MTV.lat">
+    <display-name>MTV HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/MTV_Logo_2010.svg/512px-MTV_Logo_2010.svg.png" />
+  </channel>
+  <channel id="MundoMusica.lat">
+    <display-name>Mundo de la Música</display-name>
+  </channel>
+  <channel id="MusicaVene.ve">
+    <display-name>Música Vene</display-name>
+  </channel>
+  <channel id="Megab.cl">
+    <display-name>Mega (Op 2)</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mega_%28Chile%29_logo.svg/512px-Mega_%28Chile%29_logo.svg.png" />
+  </channel>
+  <channel id="MovistarDeportes.pe">
+    <display-name>Movistar Deportes</display-name>
+  </channel>
+  <channel id="NuevoTiempo.lat">
+    <display-name>Nuevo Tiempo</display-name>
+  </channel>
+  <channel id="NatGeo.lat">
+    <display-name>Nat Geo HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/National_Geographic_Channel.svg/512px-National_Geographic_Channel.svg.png" />
+  </channel>
+  <channel id="Nick.lat">
+    <display-name>Nick HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Nickelodeon_2009_logo.svg/512px-Nickelodeon_2009_logo.svg.png" />
+  </channel>
+  <channel id="NickJr.lat">
+    <display-name>Nick Jr.</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Nick_Jr._logo_2009.svg/512px-Nick_Jr._logo_2009.svg.png" />
+  </channel>
+  <channel id="NickMusic.lat">
+    <display-name>Nick Music</display-name>
+  </channel>
+  <channel id="NuestraTele.co">
+    <display-name>Nuestra Tele</display-name>
+  </channel>
+  <channel id="OromarTV.ec">
+    <display-name>Oromar TV</display-name>
+  </channel>
+  <channel id="Panamericana.pe">
+    <display-name>Panamericana</display-name>
+  </channel>
+  <channel id="Pasiones.lat">
+    <display-name>Pasiones HD</display-name>
+  </channel>
+  <channel id="PlimPlim.ar">
+    <display-name>Plim Plim TV</display-name>
+  </channel>
+  <channel id="RAIItalia.it">
+    <display-name>RAI Italia</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Rai_logo_2020.svg/512px-Rai_logo_2020.svg.png" />
+  </channel>
+  <channel id="RECTV.cl">
+    <display-name>REC TV</display-name>
+  </channel>
+  <channel id="RPP.pe">
+    <display-name>RPP</display-name>
+  </channel>
+  <channel id="SomosTV.ve">
+    <display-name>Somos TV Venezuela</display-name>
+  </channel>
+  <channel id="StarChannel.lat">
+    <display-name>Star Channel</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png" />
+  </channel>
+  <channel id="StarChannelHD.lat">
+    <display-name>Star Channel HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png" />
+  </channel>
+  <channel id="Sextreme.lat">
+    <display-name>Sextreme</display-name>
+  </channel>
+  <channel id="Sony.lat">
+    <display-name>Sony HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Sony_Channel_logo.svg/512px-Sony_Channel_logo.svg.png" />
+  </channel>
+  <channel id="SonyMovies.lat">
+    <display-name>Sony Movies HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Sony_Channel_logo.svg/512px-Sony_Channel_logo.svg.png" />
+  </channel>
+  <channel id="Space.lat">
+    <display-name>Space HD</display-name>
+  </channel>
+  <channel id="StingrayConcerts.lat">
+    <display-name>Stingray Concerts HD</display-name>
+  </channel>
+  <channel id="StudioUniversal.lat">
+    <display-name>Studio Universal HD</display-name>
+  </channel>
+  <channel id="TCM.lat">
+    <display-name>TCM</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/TCM_logo.svg/512px-TCM_logo.svg.png" />
+  </channel>
+  <channel id="TNT.lat">
+    <display-name>TNT HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/TNT_Logo_2016.svg/512px-TNT_Logo_2016.svg.png" />
+  </channel>
+  <channel id="TNTNovelas.lat">
+    <display-name>TNT Novelas HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/TNT_Logo_2016.svg/512px-TNT_Logo_2016.svg.png" />
+  </channel>
+  <channel id="TNTSeries.lat">
+    <display-name>TNT Series HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/TNT_Logo_2016.svg/512px-TNT_Logo_2016.svg.png" />
+  </channel>
+  <channel id="TNTSportsPremium.ar">
+    <display-name>TNT Sports Premium HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/TNT_Logo_2016.svg/512px-TNT_Logo_2016.svg.png" />
+  </channel>
+  <channel id="TopLatino.lat">
+    <display-name>Top Latino</display-name>
+  </channel>
+  <channel id="TVAragua.ve">
+    <display-name>TV Aragua</display-name>
+  </channel>
+  <channel id="TVPeru.pe">
+    <display-name>TV Perú</display-name>
+  </channel>
+  <channel id="TVE.es">
+    <display-name>TVE</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/TVE_logo.svg/512px-TVE_logo.svg.png" />
+  </channel>
+  <channel id="TVSMaracay.ve">
+    <display-name>TVS Maracay</display-name>
+  </channel>
+  <channel id="TeenNick.lat">
+    <display-name>TeenNick</display-name>
+  </channel>
+  <channel id="Telefe.ar">
+    <display-name>Telefé</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Telefe_logo_2022.svg/512px-Telefe_logo_2022.svg.png" />
+  </channel>
+  <channel id="Telemundo.us">
+    <display-name>Telemundo</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Telemundo_logo_2018.svg/512px-Telemundo_logo_2018.svg.png" />
+  </channel>
+  <channel id="Tlnovelas.mx">
+    <display-name>Tlnovelas</display-name>
+  </channel>
+  <channel id="Tooncast.lat">
+    <display-name>Tooncast</display-name>
+  </channel>
+  <channel id="UFC.us">
+    <display-name>UFC</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/512px-UFC_Logo.svg.png" />
+  </channel>
+  <channel id="UniversalChannel.lat">
+    <display-name>Universal Channel HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Universal_TV_logo.svg/512px-Universal_TV_logo.svg.png" />
+  </channel>
+  <channel id="USA.us">
+    <display-name>USA Network</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/USA_Network_logo_2016.svg/512px-USA_Network_logo_2016.svg.png" />
+  </channel>
+  <channel id="VisionMusica.lat">
+    <display-name>Visión Música</display-name>
+  </channel>
+  <channel id="ViaXEsports.cl">
+    <display-name>Vía X Esports</display-name>
+  </channel>
+  <channel id="WarnerChannel.lat">
+    <display-name>Warner Channel</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Warner_Channel_logo_%282019%29.svg/512px-Warner_Channel_logo_%282019%29.svg.png" />
+  </channel>
+  <channel id="WarnerChannelHD.lat">
+    <display-name>Warner Channel HD</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Warner_Channel_logo_%282019%29.svg/512px-Warner_Channel_logo_%282019%29.svg.png" />
+  </channel>
+  <channel id="Willax.pe">
+    <display-name>Willax</display-name>
+  </channel>
+  <channel id="FibMusic.lat">
+    <display-name>Fib Music</display-name>
+  </channel>
+  <channel id="FibPeliculas.lat">
+    <display-name>Fib Películas</display-name>
+  </channel>
+  <channel id="VclassicMusica.lat">
+    <display-name>VClassic Música</display-name>
+  </channel>
+  <channel id="WestTV.lat">
+    <display-name>West TV</display-name>
+  </channel>
+  <channel id="DSportsOp3.lat">
+    <display-name>DSports (Opción 3)</display-name>
+    <icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/DSports_logo.svg/512px-DSports_logo.svg.png" />
+  </channel>
+  <channel id="TVO.es">
+    <display-name>TVO</display-name>
+  </channel>
+  <channel id="CanalI.ve">
+    <display-name>Canal I</display-name>
+  </channel>
+  <channel id="Globovision.ve">
+    <display-name>Globovisión</display-name>
+  </channel>
+  <channel id="TLT.ve">
+    <display-name>TLT</display-name>
+  </channel>
+  <channel id="Venevision.ve">
+    <display-name>Venevisión</display-name>
+  </channel>
+
+  <programme start="20261127080000 -0400" stop="20261127100000 -0400" channel="AE.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para A&amp;E HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127100000 -0400" channel="AMCHD.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para AMC HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127100000 -0400" channel="AXN.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para AXN HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127100000 -0400" channel="DSports.lat">
+    <title lang="es">Transmisión en vivo</title>
+    <desc lang="es">Guía activa para DSports.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127100000 -0400" channel="ESPN.lat">
+    <title lang="es">Transmisión en vivo</title>
+    <desc lang="es">Guía activa para ESPN HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127100000 -0400" channel="StarChannelHD.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Star Channel HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127100000 -0400" channel="WarnerChannelHD.lat">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Warner Channel HD.</desc>
+  </programme>
+  <programme start="20261127080000 -0400" stop="20261127100000 -0400" channel="Venevision.ve">
+    <title lang="es">Programación en emisión</title>
+    <desc lang="es">Guía activa para Venevisión.</desc>
+  </programme>
+</tv>
+
 </tv>
