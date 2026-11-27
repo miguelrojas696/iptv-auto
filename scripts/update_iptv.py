@@ -121,7 +121,7 @@ CHANNELS = {
     "RPP.pe": ("RPP", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/RPP_logo.svg/512px-RPP_logo.svg.png", ["rpp"]),
     "SomosTV.ve": ("Somos TV Venezuela", "", ["somos tv"]),
     "StarChannel.lat": ("Star Channel", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png", ["star channel"]),
-    ""StarChannel.lat": ("Star Channel HD", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png", ["star channel"]),
+    "StarChannel.lat": ("Star Channel HD", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png", ["star channel"]),
     "Sextreme.lat": ("Sextreme", "", ["sextreme"]),
     "Sony.lat": ("Sony", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Sony_Channel_logo.svg/512px-Sony_Channel_logo.svg.png", ["sony channel", "sony"]),
     "SonyMovies.lat": ("Sony Movies", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Sony_Channel_logo.svg/512px-Sony_Channel_logo.svg.png", ["sony movies"]),
