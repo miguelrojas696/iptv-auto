@@ -1,4 +1,5 @@
 import gzip
+import io
 import re
 import unicodedata
 import xml.etree.ElementTree as ET
@@ -161,14 +162,6 @@ def norm(text):
     return re.sub(r"[^a-z0-9 ]+", " ", text.lower()).strip()
 
 
-def fetch_xml(url):
-    headers = {"User-Agent": "Mozilla/5.0 (iptv-epg-builder/1.0)"}
-    r = requests.get(url, headers=headers, timeout=45)
-    r.raise_for_status()
-    data = gzip.decompress(r.content) if url.endswith(".gz") else r.content
-    return ET.fromstring(data)
-
-
 def find_best_channel_match(keywords, source_channels):
     norm_keywords = [norm(kw) for kw in keywords if norm(kw)]
     if not norm_keywords:
@@ -205,24 +198,62 @@ def add_fallback_programme(root, tvg_id, display_name):
     desc_el.text = f"Guía activa para {display_name}."
 
 
+def stream_parse_source(url, source_channels, matched_cids_needed, source_programmes):
+    headers = {"User-Agent": "Mozilla/5.0 (iptv-epg-builder/1.0)"}
+    with requests.get(url, headers=headers, stream=True, timeout=60) as r:
+        r.raise_for_status()
+        raw_stream = r.raw
+        stream = gzip.GzipFile(fileobj=raw_stream) if url.endswith(".gz") else raw_stream
+
+        # Primera pasada ligera: solo canales
+        for event, elem in ET.iterparse(stream, events=("end",)):
+            if elem.tag == "channel":
+                cid = elem.attrib.get("id", "")
+                names = [norm(d.text) for d in elem.findall("display-name") if d.text]
+                if cid and names:
+                    source_channels[cid] = names
+                elem.clear()
+            elif elem.tag == "programme":
+                elem.clear()
+
+    # Determinar qué source_cid necesitamos guardar
+    needed_set = set()
+    for _, _, keywords in CHANNELS.values():
+        matched = find_best_channel_match(keywords, source_channels)
+        if matched:
+            needed_set.add(matched)
+            matched_cids_needed.add(matched)
+
+    if not needed_set:
+        return
+
+    # Segunda pasada ligera: solo programas de los canales que sí coinciden
+    with requests.get(url, headers=headers, stream=True, timeout=60) as r:
+        r.raise_for_status()
+        raw_stream = r.raw
+        stream = gzip.GzipFile(fileobj=raw_stream) if url.endswith(".gz") else raw_stream
+
+        for event, elem in ET.iterparse(stream, events=("end",)):
+            if elem.tag == "programme":
+                cid = elem.attrib.get("channel", "")
+                if cid in needed_set:
+                    source_programmes.setdefault(cid, []).append(elem)
+                else:
+                    elem.clear()
+            elif elem.tag == "channel":
+                elem.clear()
+
+
 def build_epg():
     root = ET.Element("tv", attrib={"generator-info-name": "miguelrojas696-iptv-epg"})
     source_channels = {}
+    matched_cids_needed = set()
     source_programmes = {}
 
     for url in EPG_SOURCES:
         try:
-            src = fetch_xml(url)
-            for ch in src.findall("channel"):
-                cid = ch.attrib.get("id", "")
-                names = [norm(d.text) for d in ch.findall("display-name") if d.text]
-                if cid:
-                    source_channels[cid] = names
-            for prog in src.findall("programme"):
-                cid = prog.attrib.get("channel", "")
-                if cid:
-                    source_programmes.setdefault(cid, []).append(prog)
-            print(f"Fuente cargada: {url} ({len(source_channels)} canales)")
+            stream_parse_source(url, source_channels, matched_cids_needed, source_programmes)
+            print(f"Fuente procesada: {url} ({len(source_channels)} canales detectados)")
         except Exception as e:
             print(f"Aviso con fuente {url}: {e}")
 
