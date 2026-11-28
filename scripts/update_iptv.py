@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, timezone
 import requests
 
 EPG_SOURCES = [
-    "https://raw.githubusercontent.com/acidjesuz/EPG/master/guide.xml",
+    "https://epgshare01.online/epgshare01/epg_ripper_ALL_SOURCES1.xml.gz",
 ]
 
 # tvg-id de tu M3U -> (nombre visible, logo_url, keywords de búsqueda)
