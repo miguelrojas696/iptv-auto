@@ -1,173 +1,158 @@
-import gc
 import gzip
-import io
 import re
 import unicodedata
 import xml.etree.ElementTree as ET
+from datetime import datetime, timedelta, timezone
 import requests
 
 EPG_SOURCES = [
-    "https://iptv-epg.org/files/epg-pe.xml.gz",
-    "https://iptv-epg.org/files/epg-cl.xml.gz",
-    "https://iptv-epg.org/files/epg-ve.xml.gz",
-    "https://iptv-epg.org/files/epg-mx.xml.gz",
-    "https://iptv-epg.org/files/epg-co.xml.gz",
-    "https://iptv-epg.org/files/epg-ar.xml.gz",
-    "https://iptv-epg.org/files/epg-ec.xml.gz",
-    "https://iptv-epg.org/files/epg-us.xml.gz",
-    "https://iptv-epg.org/files/epg-es.xml.gz",
-    "https://iptv-epg.org/files/epg-uk.xml.gz",
-    "https://iptv-epg.org/files/epg-fr.xml.gz",
-    "https://iptv-epg.org/files/epg-de.xml.gz",
-    "https://iptv-epg.org/files/epg-it.xml.gz",
+    "https://raw.githubusercontent.com/acidjesuz/EPG/master/guide.xml",
 ]
 
-# tvg-id -> (nombre visible, logo_url, keywords de búsqueda)
+# tvg-id de tu M3U -> (nombre visible, logo_url, keywords de búsqueda)
 CHANNELS = {
-    "AE.lat": ("A&E", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A%26E_Network_logo.svg/512px-A%26E_Network_logo.svg.png", ["a&e", "ae network", "ae"]),
-    "AMC.lat": ("AMC", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/AMC_logo_2019.svg/512px-AMC_logo_2019.svg.png", ["amc"]),
-    "AMCHD.lat": ("AMC HD", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/AMC_logo_2019.svg/512px-AMC_logo_2019.svg.png", ["amc hd", "amc"]),
-    "ATV.pe": ("ATV", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/ATV_Per%C3%BA_logo.svg/512px-ATV_Per%C3%BA_logo.svg.png", ["atv peru", "atv"]),
-    "AXN.lat": ("AXN", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/AXN_logo_2023.svg/512px-AXN_logo_2023.svg.png", ["axn"]),
-    "AdultSwim.lat": ("Adult Swim", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Adult_Swim_2023_logo.svg/512px-Adult_Swim_2023_logo.svg.png", ["adult swim"]),
-    "AmericaTV.pe": ("América TV", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Am%C3%A9rica_Televisi%C3%B3n_logo.svg/512px-Am%C3%A9rica_Televisi%C3%B3n_logo.svg.png", ["america tv", "america television"]),
-    "AnimalPlanet.lat": ("Animal Planet", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Animal_Planet_logo.svg/512px-Animal_Planet_logo.svg.png", ["animal planet"]),
-    "BBCNews.uk": ("BBC News", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/BBC_News_2022_%28icon%29.svg/512px-BBC_News_2022_%28icon%29.svg.png", ["bbc news", "bbc world"]),
-    "BethelTV.pe": ("Bethel TV", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Bethel_Television_logo.svg/512px-Bethel_Television_logo.svg.png", ["bethel tv", "bethel"]),
-    "BabyTV.lat": ("Baby TV", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/BabyTV_logo.svg/512px-BabyTV_logo.svg.png", ["baby tv", "babytv"]),
-    "CHV.cl": ("CHV", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Chilevisi%C3%B3n_2020.svg/512px-Chilevisi%C3%B3n_2020.svg.png", ["chilevision", "chv"]),
-    "CNNespanol.lat": ("CNN Español", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/CNN_International_logo.svg/512px-CNN_International_logo.svg.png", ["cnn en espanol", "cnn espanol"]),
-    "CNNintl.uk": ("CNN International", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/CNN_International_logo.svg/512px-CNN_International_logo.svg.png", ["cnn international"]),
-    "CanalN.pe": ("Canal N", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Canal_N_logo.svg/512px-Canal_N_logo.svg.png", ["canal n"]),
-    "CartoonNetwork.lat": ("Cartoon Network", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Cartoon_Network_2010_logo.svg/512px-Cartoon_Network_2010_logo.svg.png", ["cartoon network"]),
-    "Cartoonito.lat": ("Cartoonito", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Cartoonito_2021_logo.svg/512px-Cartoonito_2021_logo.svg.png", ["cartoonito"]),
-    "Cinecanal.lat": ("Cinecanal", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Cinecanal_logo.svg/512px-Cinecanal_logo.svg.png", ["cinecanal"]),
-    "Cinemax.lat": ("Cinemax", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Cinemax_logo.svg/512px-Cinemax_logo.svg.png", ["cinemax"]),
-    "ComedyCentral.lat": ("Comedy Central", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Comedy_Central_2018.svg/512px-Comedy_Central_2018.svg.png", ["comedy central"]),
-    "Daystar.us": ("Daystar", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Daystar_Television_Network_logo.svg/512px-Daystar_Television_Network_logo.svg.png", ["daystar"]),
-    "DWespanol.de": ("DW Español", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deutsche_Welle_symbol_2012.svg/512px-Deutsche_Welle_symbol_2012.svg.png", ["dw espanol", "deutsche welle"]),
-    "DePelicula.mx": ("De Película", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/De_Pel%C3%ADcula_logo.svg/512px-De_Pel%C3%ADcula_logo.svg.png", ["de pelicula"]),
-    "DirecTV.lat": ("DirecTV", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/DirecTV_logo_2019.svg/512px-DirecTV_logo_2019.svg.png", ["directv"]),
-    "DSports.lat": ("DSports", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/DSports_logo.svg/512px-DSports_logo.svg.png", ["dsports", "directv sports"]),
-    "DiscoveryChannel.lat": ("Discovery Channel", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Discovery_Channel_%282019%29.svg/512px-Discovery_Channel_%282019%29.svg.png", ["discovery channel", "discovery"]),
-    "DiscoveryKids.lat": ("Discovery Kids", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Discovery_Kids_2016.svg/512px-Discovery_Kids_2016.svg.png", ["discovery kids"]),
-    "DiscoveryTheater.lat": ("Discovery Theater", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Discovery_Channel_%282019%29.svg/512px-Discovery_Channel_%282019%29.svg.png", ["discovery theater", "discovery turbo"]),
-    "DisneyChannel.lat": ("Disney Channel", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Disney_Channel_logo_%282014%29.svg/512px-Disney_Channel_logo_%282014%29.svg.png", ["disney channel", "disney"]),
-    "DisneyJunior.lat": ("Disney Junior", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Disney_Junior_logo_2014.svg/512px-Disney_Junior_logo.svg.png", ["disney junior"]),
-    "DistritoComedia.mx": ("Distrito Comedia", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Distrito_Comedia_logo.svg/512px-Distrito_Comedia_logo.svg.png", ["distrito comedia"]),
-    "E.lat": ("E! Entertainment TV", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/E%21_logo_2012.svg/512px-E%21_logo_2012.svg.png", ["e entertainment", "e! entertainment"]),
-    "ESPN2.lat": ("ESPN 2", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/512px-ESPN2_logo.svg.png", ["espn 2", "espn2"]),
-    "ESPN2b.lat": ("ESPN 2 (Op 2)", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ESPN2_logo.svg/512px-ESPN2_logo.svg.png", ["espn 2", "espn2"]),
-    "ESPN3.lat": ("ESPN 3", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/ESPN3_logo.svg/512px-ESPN3_logo.svg.png", ["espn 3", "espn3"]),
-    "ESPN4.lat": ("ESPN 4", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png", ["espn 4", "espn4"]),
-    "ESPN5.lat": ("ESPN 5", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png", ["espn 5", "espn5"]),
-    "ESPN6.lat": ("ESPN 6", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png", ["espn 6", "espn6"]),
-    "ESPN7.lat": ("ESPN 7", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png", ["espn 7", "espn7"]),
-    "ESPN.lat": ("ESPN", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png", ["espn"]),
-    "ESPNb.lat": ("ESPN (Op 2)", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png", ["espn"]),
-    "ESPNc.lat": ("ESPN (Op 3)", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png", ["espn"]),
-    "ESPNPremium.ar": ("ESPN Premium", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/512px-ESPN_wordmark.svg.png", ["espn premium"]),
-    "EWTN.us": ("EWTN", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/EWTN_logo.svg/512px-EWTN_logo.svg.png", ["ewtn"]),
-    "ElGourmet.lat": ("El Gourmet", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/El_Gourmet_logo.svg/512px-El_Gourmet_logo.svg.png", ["el gourmet"]),
-    "Enlace.lat": ("Enlace", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Enlace_TV_logo.svg/512px-Enlace_TV_logo.svg.png", ["enlace"]),
-    "EuropaEuropa.lat": ("Europa Europa", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Europa_Europa_logo.svg/512px-Europa_Europa_logo.svg.png", ["europa europa"]),
-    "ExitosaTV.pe": ("Exitosa TV", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Exitosa_TV_logo.svg/512px-Exitosa_TV_logo.svg.png", ["exitosa"]),
-    "FMHFamily.lat": ("FMH Family", "", ["fmh family"]),
-    "FMHFamilyKids.lat": ("FMH Family Kids", "", ["fmh family kids"]),
+    "ESPN2.lat": ("ESPN 2 HD", "", ["espn 2", "espn2"]),
+    "ESPN2b.lat": ("ESPN 2 HD (Op. 2)", "", ["espn 2", "espn2"]),
+    "ESPN3.lat": ("ESPN 3 HD", "", ["espn 3", "espn3"]),
+    "ESPN4.lat": ("ESPN 4 HD", "", ["espn 4", "espn4"]),
+    "ESPN5.lat": ("ESPN 5 HD", "", ["espn 5", "espn5"]),
+    "ESPN6.lat": ("ESPN 6 HD", "", ["espn 6", "espn6"]),
+    "ESPN7.lat": ("ESPN 7 HD", "", ["espn 7", "espn7"]),
+    "ESPN.lat": ("ESPN HD", "", ["espn"]),
+    "ESPNb.lat": ("ESPN HD (Op. 2)", "", ["espn"]),
+    "ESPNc.lat": ("ESPN HD (Op. 3)", "", ["espn"]),
+    "ESPNPremium.ar": ("ESPN Premium HD", "", ["espn premium"]),
+    "FoxSportsPremium.ar": ("Fox Sports Premium", "", ["fox sports premium"]),
+    "DSports.lat": ("DSports", "", ["dsports", "directv sports"]),
+    "L1.pe": ("L1", "", ["liga 1"]),
+    "L1Max.pe": ("L1 MAX", "", ["liga 1 max"]),
+    "MovistarDeportes.pe": ("Movistar Deportes", "", ["movistar deportes"]),
+    "TNTSportsPremium.ar": ("TNT Sports Premium HD", "", ["tnt sports"]),
+    "UFC.us": ("UFC", "", ["ufc"]),
+    "ViaXEsports.cl": ("Vía X Esports", "", ["via x esports"]),
+    "AMCHD.lat": ("AMC HD", "", ["amc"]),
+    "Cinecanal.lat": ("Cinecanal HD", "", ["cinecanal"]),
+    "Cinemax.lat": ("Cinemax", "", ["cinemax"]),
+    "DePelicula.mx": ("De Película", "", ["de pelicula"]),
     "FMHFamilyMovie.lat": ("FMH Family Movie", "", ["fmh family movie"]),
-    "FoxSportsPremium.ar": ("Fox Sports Premium", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Fox_Sports_logo.svg/512px-Fox_Sports_logo.svg.png", ["fox sports premium", "fox sports"]),
-    "FX.lat": ("FX", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/FX_logo.svg/512px-FX_logo.svg.png", ["fx"]),
-    "FilmArts.lat": ("Film&Arts", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Film%26Arts_logo.svg/512px-Film%26Arts_logo.svg.png", ["film&arts", "film and arts"]),
-    "FilmArtsb.lat": ("Film&Arts (Op 2)", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Film%26Arts_logo.svg/512px-Film%26Arts_logo.svg.png", ["film&arts", "film and arts"]),
-    "FoodNetwork.lat": ("Food Network", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Food_Network_logo.svg/512px-Food_Network_logo.svg.png", ["food network"]),
-    "France24.fr": ("France 24", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/France_24_logo.svg/512px-France_24_logo.svg.png", ["france 24"]),
-    "Global.pe": ("Global TV", "", ["global tv", "global"]),
-    "GoldenEdge.lat": ("Golden Edge", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Golden_Edge_logo.svg/512px-Golden_Edge_logo.svg.png", ["golden edge"]),
-    "Golden.lat": ("Golden", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Golden_TV_logo.svg/512px-Golden_TV_logo.svg.png", ["golden"]),
-    "HBOFamily.lat": ("HBO Family", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png", ["hbo family"]),
-    "HBO.lat": ("HBO", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png", ["hbo"]),
-    "HBOMundi.lat": ("HBO Mundi", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png", ["hbo mundi"]),
-    "HBOPlus.lat": ("HBO Plus", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png", ["hbo plus"]),
-    "HBOSignature.lat": ("HBO Signature", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png", ["hbo signature"]),
-    "HBOExtreme.lat": ("HBO Xtreme", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HBO_logo.svg/512px-HBO_logo.svg.png", ["hbo xtreme"]),
-    "HTV.lat": ("HTV", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/HTV_logo.svg/512px-HTV_logo.svg.png", ["htv"]),
-    "HTVb.lat": ("HTV (Op 2)", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/HTV_logo.svg/512px-HTV_logo.svg.png", ["htv"]),
-    "History2.lat": ("History 2", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/History_Channel_logo.svg/512px-History_Channel_logo.svg.png", ["history 2", "h2"]),
-    "History.lat": ("History Channel", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/History_Channel_logo.svg/512px-History_Channel_logo.svg.png", ["history channel", "history"]),
-    "HomeHealth.lat": ("Home & Health", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Discovery_Home_%26_Health_logo.svg/512px-Discovery_Home_%26_Health_logo.svg.png", ["home & health", "home and health"]),
-    "ID.lat": ("ID", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Investigation_Discovery_logo.svg/512px-Investigation_Discovery_logo.svg.png", ["investigation discovery", "id"]),
-    "Karibena.pe": ("Karibeña", "", ["karibena"]),
+    "GoldenEdge.lat": ("Golden Edge", "", ["golden edge"]),
+    "Golden.lat": ("Golden HD", "", ["golden"]),
+    "HBOFamily.lat": ("HBO Family HD", "", ["hbo family"]),
+    "HBO.lat": ("HBO HD", "", ["hbo"]),
+    "HBOMundi.lat": ("HBO Mundi", "", ["hbo mundi"]),
+    "HBOPlus.lat": ("HBO Plus", "", ["hbo plus"]),
+    "HBOSignature.lat": ("HBO Signature", "", ["hbo signature"]),
+    "HBOExtreme.lat": ("HBO Xtreme HD", "", ["hbo xtreme"]),
+    "SonyMovies.lat": ("Sony Movies", "", ["sony movies"]),
+    "Space.lat": ("Space HD", "", ["space"]),
+    "StudioUniversal.lat": ("Studio Universal HD", "", ["studio universal"]),
+    "TCM.lat": ("TCM", "", ["tcm"]),
+    "TNT.lat": ("TNT HD", "", ["tnt"]),
+    "FibPeliculas.lat": ("Fib Películas", "", ["fib peliculas"]),
     "KanalDDrama.lat": ("Kanal D Drama", "", ["kanal d drama"]),
-    "L1.pe": ("L1", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Liga_1_%28Per%C3%BA%29_logo.svg/512px-Liga_1_%28Per%C3%BA%29_logo.svg.png", ["liga 1", "l1"]),
-    "L1Max.pe": ("L1 MAX", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Liga_1_%28Per%C3%BA%29_logo.svg/512px-Liga_1_%28Per%C3%BA%29_logo.svg.png", ["liga 1 max", "l1 max"]),
-    "LaRed.cl": ("La Red", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/La_Red_%28Chile%29_logo.svg/512px-La_Red_%28Chile%29_logo.svg.png", ["la red"]),
-    "LasEstrellas.mx": ("Las Estrellas", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Las_Estrellas_logo.svg/512px-Las_Estrellas_logo.svg.png", ["las estrellas"]),
-    "Latina.pe": ("Latina", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Latina_Televisi%C3%B3n_logo.svg/512px-Latina_Televisi%C3%B3n_logo.svg.png", ["latina"]),
-    "Lifetime.lat": ("Lifetime", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Lifetime_logo.svg/512px-Lifetime_logo.svg.png", ["lifetime"]),
-    "LoveNature.lat": ("Love Nature", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Love_Nature_logo.svg/512px-Love_Nature_logo.svg.png", ["love nature"]),
-    "Mega.cl": ("MEGA", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mega_%28Chile%29_logo.svg/512px-Mega_%28Chile%29_logo.svg.png", ["mega"]),
-    "MiMusicaHits.lat": ("Mi Música Hits", "", ["mi musica hits"]),
-    "MiMusicaPeru.pe": ("Mi Música Perú", "", ["mi musica peru"]),
-    "MTV.lat": ("MTV", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/MTV_Logo_2010.svg/512px-MTV_Logo_2010.svg.png", ["mtv"]),
-    "MundoMusica.lat": ("Mundo de la Música", "", ["mundo de la musica"]),
-    "MusicaVene.ve": ("Música Vene", "", ["musica vene"]),
-    "Megab.cl": ("Mega (Op 2)", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mega_%28Chile%29_logo.svg/512px-Mega_%28Chile%29_logo.svg.png", ["mega"]),
-    "MovistarDeportes.pe": ("Movistar Deportes", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Movistar_Deportes_logo.svg/512px-Movistar_Deportes_logo.svg.png", ["movistar deportes"]),
-    "NuevoTiempo.lat": ("Nuevo Tiempo", "", ["nuevo tiempo"]),
-    "NatGeo.lat": ("Nat Geo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/National_Geographic_Channel.svg/512px-National_Geographic_Channel.svg.png", ["national geographic", "nat geo"]),
-    "Nick.lat": ("Nick", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Nickelodeon_2009_logo.svg/512px-Nickelodeon_2009_logo.svg.png", ["nickelodeon", "nick"]),
-    "NickJr.lat": ("Nick Jr.", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Nick_Jr._logo_2009.svg/512px-Nick_Jr._logo_2009.svg.png", ["nick jr"]),
-    "NickMusic.lat": ("Nick Music", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/NickMusic_logo.svg/512px-NickMusic_logo.svg.png", ["nick music"]),
+    "Pasiones.lat": ("Pasiones HD", "", ["pasiones"]),
+    "TNTNovelas.lat": ("TNT Novelas HD", "", ["tnt novelas"]),
+    "Telemundo.us": ("Telemundo", "", ["telemundo"]),
+    "Tlnovelas.mx": ("Tlnovelas", "", ["tlnovelas"]),
+    "AE.lat": ("A&E HD", "", ["a&e", "ae network"]),
+    "AXN.lat": ("AXN HD", "", ["axn"]),
+    "AdultSwim.lat": ("Adult Swim", "", ["adult swim"]),
+    "AnimalPlanet.lat": ("Animal Planet HD", "", ["animal planet"]),
+    "ComedyCentral.lat": ("Comedy Central HD", "", ["comedy central"]),
+    "DiscoveryChannel.lat": ("Discovery Channel HD", "", ["discovery channel"]),
+    "DiscoveryTheater.lat": ("Discovery Theater HD", "", ["discovery theater"]),
+    "DistritoComedia.mx": ("Distrito Comedia", "", ["distrito comedia"]),
+    "E.lat": ("E! Entertainment TV", "", ["e entertainment", "e! entertainment"]),
+    "ElGourmet.lat": ("El Gourmet HD", "", ["el gourmet"]),
+    "EuropaEuropa.lat": ("Europa Europa", "", ["europa europa"]),
+    "FMHFamily.lat": ("FMH Family", "", ["fmh family"]),
+    "FX.lat": ("FX HD", "", ["fx"]),
+    "FilmArts.lat": ("Film&Arts", "", ["film&arts", "film and arts"]),
+    "FilmArtsb.lat": ("Film&Arts (Op. 2)", "", ["film&arts", "film and arts"]),
+    "FoodNetwork.lat": ("Food Network", "", ["food network"]),
+    "History2.lat": ("History 2", "", ["history 2", "h2"]),
+    "History.lat": ("History Channel HD", "", ["history"]),
+    "HomeHealth.lat": ("Home & Health HD", "", ["home & health", "home and health"]),
+    "ID.lat": ("ID HD", "", ["investigation discovery"]),
+    "Lifetime.lat": ("Lifetime", "", ["lifetime"]),
+    "LoveNature.lat": ("Love Nature", "", ["love nature"]),
+    "NatGeo.lat": ("Nat Geo HD", "", ["national geographic", "nat geo"]),
+    "Sony.lat": ("Sony HD", "", ["sony channel"]),
+    "TNTSeries.lat": ("TNT Series HD", "", ["tnt series"]),
+    "UniversalChannel.lat": ("Universal Channel HD", "", ["universal tv", "universal channel"]),
+    "USA.us": ("USA Network", "", ["usa network"]),
+    "WarnerChannel.lat": ("Warner Channel", "", ["warner"]),
+    "WarnerChannelHD.lat": ("Warner Channel HD", "", ["warner"]),
+    "BabyTV.lat": ("Baby TV", "", ["baby tv", "babytv"]),
+    "CartoonNetwork.lat": ("Cartoon Network HD", "", ["cartoon network"]),
+    "Cartoonito.lat": ("Cartoonito", "", ["cartoonito"]),
+    "DiscoveryKids.lat": ("Discovery Kids HD", "", ["discovery kids"]),
+    "DisneyChannel.lat": ("Disney HD", "", ["disney channel"]),
+    "DisneyJunior.lat": ("Disney Junior", "", ["disney junior"]),
+    "FMHFamilyKids.lat": ("FMH Family Kids", "", ["fmh family kids"]),
+    "Nick.lat": ("Nick HD", "", ["nickelodeon"]),
+    "NickJr.lat": ("Nick Jr.", "", ["nick jr"]),
+    "PlimPlim.ar": ("Plim Plim TV", "", ["plim plim"]),
+    "TeenNick.lat": ("TeenNick", "", ["teen nick", "teennick"]),
+    "Tooncast.lat": ("Tooncast", "", ["tooncast"]),
+    "ATV.pe": ("ATV", "", ["atv peru", "atv"]),
+    "AmericaTV.pe": ("América TV HD", "", ["america tv", "america television"]),
+    "BBCNews.uk": ("BBC News", "", ["bbc news", "bbc world"]),
+    "CHV.cl": ("CHV HD", "", ["chilevision", "chv"]),
+    "CNNespanol.lat": ("CNN Español", "", ["cnn en espanol", "cnn espanol"]),
+    "CNNintl.uk": ("CNN International", "", ["cnn international"]),
+    "CanalN.pe": ("Canal N", "", ["canal n"]),
+    "DWespanol.de": ("DW Español", "", ["dw espanol", "deutsche welle"]),
+    "DirecTV.lat": ("DirecTV", "", ["directv"]),
+    "ExitosaTV.pe": ("Exitosa TV", "", ["exitosa"]),
+    "France24.fr": ("France 24", "", ["france 24"]),
+    "Global.pe": ("Global TV", "", ["global tv", "global"]),
+    "Karibena.pe": ("Karibeña", "", ["karibena"]),
+    "LaRed.cl": ("La Red", "", ["la red"]),
+    "LasEstrellas.mx": ("Las Estrellas HD", "", ["las estrellas"]),
+    "Latina.pe": ("Latina HD", "", ["latina"]),
+    "Mega.cl": ("MEGA HD", "", ["mega"]),
+    "Megab.cl": ("Mega (Op. 2)", "", ["mega"]),
     "NuestraTele.co": ("Nuestra Tele", "", ["nuestra tele"]),
     "OromarTV.ec": ("Oromar TV", "", ["oromar"]),
-    "Panamericana.pe": ("Panamericana", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Panamericana_Televisi%C3%B3n_logo.svg/512px-Panamericana_Televisi%C3%B3n_logo.svg.png", ["panamericana"]),
-    "Pasiones.lat": ("Pasiones", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pasiones_TV_logo.svg/512px-Pasiones_TV_logo.svg.png", ["pasiones"]),
-    "PlimPlim.ar": ("Plim Plim TV", "", ["plim plim"]),
-    "RAIItalia.it": ("RAI Italia", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Rai_logo_2020.svg/512px-Rai_logo_2020.svg.png", ["rai italia"]),
+    "Panamericana.pe": ("Panamericana", "", ["panamericana"]),
+    "RAIItalia.it": ("RAI Italia", "", ["rai italia"]),
     "RECTV.cl": ("REC TV", "", ["rec tv"]),
-    "RPP.pe": ("RPP", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/RPP_logo.svg/512px-RPP_logo.svg.png", ["rpp"]),
+    "RPP.pe": ("RPP", "", ["rpp"]),
     "SomosTV.ve": ("Somos TV Venezuela", "", ["somos tv"]),
-    "StarChannel.lat": ("Star Channel", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png", ["star channel"]),
-    "StarChannelHD.lat": ("Star Channel (Op 2)", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Star_Channel_logo.svg/512px-Star_Channel_logo.svg.png", ["star channel"]),
-    "Sextreme.lat": ("Sextreme", "", ["sextreme"]),
-    "Sony.lat": ("Sony", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Sony_Channel_logo.svg/512px-Sony_Channel_logo.svg.png", ["sony channel", "sony"]),
-    "SonyMovies.lat": ("Sony Movies", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Sony_Channel_logo.svg/512px-Sony_Channel_logo.svg.png", ["sony movies"]),
-    "Space.lat": ("Space", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Space_logo_2015.svg/512px-Space_logo_2015.svg.png", ["space"]),
-    "StingrayConcerts.lat": ("Stingray Concerts", "", ["stingray concerts"]),
-    "StudioUniversal.lat": ("Studio Universal", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Studio_Universal_logo.svg/512px-Studio_Universal_logo.svg.png", ["studio universal"]),
-    "TCM.lat": ("TCM", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/TCM_logo.svg/512px-TCM_logo.svg.png", ["tcm"]),
-    "TNT.lat": ("TNT", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/TNT_Logo_2016.svg/512px-TNT_Logo_2016.svg.png", ["tnt"]),
-    "TNTNovelas.lat": ("TNT Novelas", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/TNT_Logo_2016.svg/512px-TNT_Logo_2016.svg.png", ["tnt novelas"]),
-    "TNTSeries.lat": ("TNT Series", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/TNT_Logo_2016.svg/512px-TNT_Logo_2016.svg.png", ["tnt series"]),
-    "TNTSportsPremium.ar": ("TNT Sports Premium", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/TNT_Logo_2016.svg/512px-TNT_Logo_2016.svg.png", ["tnt sports"]),
-    "TopLatino.lat": ("Top Latino", "", ["top latino"]),
+    "StarChannel.lat": ("Star Channel", "", ["star channel"]),
+    "StarChannelHD.lat": ("Star Channel HD", "", ["star channel"]),
     "TVAragua.ve": ("TV Aragua", "", ["tv aragua"]),
-    "TVPeru.pe": ("TV Perú", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/TV_Per%C3%BA_logo.svg/512px-TV_Per%C3%BA_logo.svg.png", ["tv peru"]),
-    "TVE.es": ("TVE", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/TVE_logo.svg/512px-TVE_logo.svg.png", ["tve"]),
+    "TVPeru.pe": ("TV Perú", "", ["tv peru"]),
+    "TVE.es": ("TVE", "", ["tve"]),
     "TVSMaracay.ve": ("TVS Maracay", "", ["tvs maracay"]),
-    "TeenNick.lat": ("TeenNick", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/TeenNick_logo_2009.svg/512px-TeenNick_logo_2009.svg.png", ["teen nick", "teennick"]),
-    "Telefe.ar": ("Telefé", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Telefe_logo_2022.svg/512px-Telefe_logo_2022.svg.png", ["telefe"]),
-    "Telemundo.us": ("Telemundo", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Telemundo_logo_2018.svg/512px-Telemundo_logo_2018.svg.png", ["telemundo"]),
-    "Tlnovelas.mx": ("Tlnovelas", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Tlnovelas_logo.svg/512px-Tlnovelas_logo.svg.png", ["tlnovelas"]),
-    "Tooncast.lat": ("Tooncast", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Tooncast_logo.svg/512px-Tooncast_logo.svg.png", ["tooncast"]),
-    "UFC.us": ("UFC", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/512px-UFC_Logo.svg.png", ["ufc"]),
-    "UniversalChannel.lat": ("Universal Channel", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Universal_TV_logo.svg/512px-Universal_TV_logo.svg.png", ["universal tv", "universal channel"]),
-    "USA.us": ("USA Network", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/USA_Network_logo_2016.svg/512px-USA_Network_logo_2016.svg.png", ["usa network"]),
-    "VisionMusica.lat": ("Visión Música", "", ["vision musica"]),
-    "ViaXEsports.cl": ("Vía X Esports", "", ["via x esports"]),
-    "WarnerChannel.lat": ("Warner Channel", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Warner_Channel_logo_%282019%29.svg/512px-Warner_Channel_logo_%282019%29.svg.png", ["warner channel", "warner"]),
-    "WarnerChannelHD.lat": ("Warner Channel (Op 2)", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Warner_Channel_logo_%282019%29.svg/512px-Warner_Channel_logo_%282019%29.svg.png", ["warner channel", "warner"]),
-    "Willax.pe": ("Willax", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Willax_Televisi%C3%B3n_logo.svg/512px-Willax_Televisi%C3%B3n_logo.svg.png", ["willax"]),
-    "FibMusic.lat": ("Fib Music", "", ["fib music"]),
-    "FibPeliculas.lat": ("Fib Películas", "", ["fib peliculas"]),
-    "VclassicMusica.lat": ("VClassic Música", "", ["vclassic"]),
+    "Telefe.ar": ("Telefé", "", ["telefe"]),
+    "Willax.pe": ("Willax", "", ["willax"]),
     "WestTV.lat": ("West TV", "", ["west tv"]),
-    "DSportsOp3.lat": ("DSports (Opción 3)", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/DSports_logo.svg/512px-DSports_logo.svg.png", ["dsports"]),
     "TVO.es": ("TVO", "", ["tvo"]),
-    "CanalI.ve": ("Canal I", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Canal_i_%28Venezuela%29_logo.svg/512px-Canal_i_%28Venezuela%29_logo.svg.png", ["canal i"]),
-    "Globovision.ve": ("Globovisión", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Globovisi%C3%B3n_logo.svg/512px-Globovisi%C3%B3n_logo.svg.png", ["globovision"]),
-    "TLT.ve": ("TLT", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/La_Tele_Tuya_logo.svg/512px-La_Tele_Tuya_logo.svg.png", ["tlt", "la tele tuya"]),
-    "Venevision.ve": ("Venevisión", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Venevisi%C3%B3n_logo.svg/512px-Venevisi%C3%B3n_logo.svg.png", ["venevision"]),
+    "CanalI.ve": ("Canal I", "", ["canal i"]),
+    "Globovision.ve": ("Globovisión", "", ["globovision"]),
+    "TLT.ve": ("TLT", "", ["tlt", "la tele tuya"]),
+    "Venevision.ve": ("Venevisión", "", ["venevision"]),
+    "HTV.lat": ("HTV", "", ["htv"]),
+    "HTVb.lat": ("HTV (Op. 2)", "", ["htv"]),
+    "MiMusicaHits.lat": ("Mi Música Hits", "", ["mi musica hits"]),
+    "MiMusicaPeru.pe": ("Mi Música Perú", "", ["mi musica peru"]),
+    "MTV.lat": ("MTV HD", "", ["mtv"]),
+    "MundoMusica.lat": ("Mundo de la Música", "", ["mundo de la musica"]),
+    "MusicaVene.ve": ("Música Vene", "", ["musica vene"]),
+    "NickMusic.lat": ("Nick Music", "", ["nick music"]),
+    "StingrayConcerts.lat": ("Stingray Concerts HD", "", ["stingray concerts"]),
+    "TopLatino.lat": ("Top Latino", "", ["top latino"]),
+    "VisionMusica.lat": ("Visión Música", "", ["vision musica"]),
+    "FibMusic.lat": ("Fib Music", "", ["fib music"]),
+    "VclassicMusica.lat": ("VClassic Música", "", ["vclassic"]),
+    "BethelTV.pe": ("Bethel TV", "", ["bethel"]),
+    "Daystar.us": ("Daystar", "", ["daystar"]),
+    "EWTN.us": ("EWTN", "", ["ewtn"]),
+    "Enlace.lat": ("Enlace", "", ["enlace"]),
+    "NuevoTiempo.lat": ("Nuevo Tiempo", "", ["nuevo tiempo"]),
+    "Sextreme.lat": ("Sextreme", "", ["sextreme"]),
 }
 
 
@@ -176,29 +161,25 @@ def norm(text):
     return re.sub(r"[^a-z0-9 ]+", " ", text.lower()).strip()
 
 
-def open_stream(url):
-    headers = {"User-Agent": "Mozilla/5.0 (iptv-epg-builder/4.0)"}
-    r = requests.get(url, headers=headers, timeout=60, stream=True)
+def fetch_xml(url):
+    headers = {"User-Agent": "Mozilla/5.0 (iptv-epg-builder/1.0)"}
+    r = requests.get(url, headers=headers, timeout=45)
     r.raise_for_status()
-    raw_bytes = io.BytesIO(r.content)
-    header = raw_bytes.getbuffer()[:2]
-    raw_bytes.seek(0)
-    if url.endswith(".gz") or bytes(header) == b"\x1f\x8b":
-        return gzip.GzipFile(fileobj=raw_bytes)
-    return raw_bytes
+    data = gzip.decompress(r.content) if url.endswith(".gz") else r.content
+    return ET.fromstring(data)
 
 
-def find_best_channel_match(tvg_id, keywords, source_channels):
-    norm_id = norm(tvg_id.split(".")[0])
+def find_best_channel_match(keywords, source_channels):
     norm_keywords = [norm(kw) for kw in keywords if norm(kw)]
-    candidates = ([norm_id] if norm_id else []) + norm_keywords
+    if not norm_keywords:
+        return None
 
-    for kw in candidates:
+    for kw in norm_keywords:
         for cid, names in source_channels.items():
             if kw in names:
                 return cid
 
-    for kw in candidates:
+    for kw in norm_keywords:
         pattern = re.compile(rf"(?:^|\s){re.escape(kw)}(?:\s|$)")
         for cid, names in source_channels.items():
             if any(pattern.search(n) for n in names):
@@ -207,73 +188,80 @@ def find_best_channel_match(tvg_id, keywords, source_channels):
     return None
 
 
+def add_fallback_programme(root, tvg_id, display_name):
+    tz_ve = timezone(timedelta(hours=-4))
+    now_ve = datetime.now(tz_ve)
+    start_dt = now_ve.replace(hour=0, minute=0, second=0, microsecond=0)
+    stop_dt = start_dt + timedelta(hours=24)
+
+    prog = ET.SubElement(root, "programme", attrib={
+        "start": start_dt.strftime("%Y%m%d%H%M%S -0400"),
+        "stop": stop_dt.strftime("%Y%m%d%H%M%S -0400"),
+        "channel": tvg_id,
+    })
+    title_el = ET.SubElement(prog, "title", attrib={"lang": "es"})
+    title_el.text = "Programación en emisión"
+    desc_el = ET.SubElement(prog, "desc", attrib={"lang": "es"})
+    desc_el.text = f"Guía activa para {display_name}."
+
+
 def build_epg():
     root = ET.Element("tv", attrib={"generator-info-name": "miguelrojas696-iptv-epg"})
+    source_channels = {}
+    source_programmes = {}
 
-    for tvg_id, (display_name, logo_url, _) in CHANNELS.items():
+    for url in EPG_SOURCES:
+        try:
+            src = fetch_xml(url)
+            for ch in src.findall("channel"):
+                cid = ch.attrib.get("id", "")
+                names = [norm(d.text) for d in ch.findall("display-name") if d.text]
+                if cid:
+                    source_channels[cid] = names
+            for prog in src.findall("programme"):
+                cid = prog.attrib.get("channel", "")
+                if cid:
+                    source_programmes.setdefault(cid, []).append(prog)
+            print(f"Fuente cargada: {url} ({len(source_channels)} canales)")
+        except Exception as e:
+            print(f"Aviso con fuente {url}: {e}")
+
+    matched_total = 0
+    fallback_total = 0
+
+    for tvg_id, (display_name, logo_url, keywords) in CHANNELS.items():
         ch_el = ET.SubElement(root, "channel", attrib={"id": tvg_id})
         dn = ET.SubElement(ch_el, "display-name")
         dn.text = display_name
         if logo_url:
             ET.SubElement(ch_el, "icon", attrib={"src": logo_url})
 
-    matched_counts = {tvg_id: 0 for tvg_id in CHANNELS}
+        matched_cid = find_best_channel_match(keywords, source_channels)
+        added_count = 0
 
-    for url in EPG_SOURCES:
-        try:
-            stream = open_stream(url)
-            source_channels = {}
+        if matched_cid and matched_cid in source_programmes:
+            for p in source_programmes[matched_cid]:
+                new_p = ET.SubElement(root, "programme", attrib={
+                    "start": p.attrib.get("start", ""),
+                    "stop": p.attrib.get("stop", ""),
+                    "channel": tvg_id,
+                })
+                for child in p:
+                    new_p.append(child)
+                added_count += 1
 
-            for event, elem in ET.iterparse(stream, events=("end",)):
-                if elem.tag == "channel":
-                    cid = elem.attrib.get("id", "").strip()
-                    names = [norm(d.text) for d in elem.findall("display-name") if d.text]
-                    if cid:
-                        source_channels[cid] = names
-                    elem.clear()
-                elif elem.tag == "programme":
-                    break
-
-            cid_to_tvg = {}
-            for tvg_id, (_, _, keywords) in CHANNELS.items():
-                best_cid = find_best_channel_match(tvg_id, keywords, source_channels)
-                if best_cid:
-                    cid_to_tvg[best_cid] = tvg_id
-
-            stream = open_stream(url)
-            for event, elem in ET.iterparse(stream, events=("end",)):
-                if elem.tag == "programme":
-                    cid = elem.attrib.get("channel", "").strip()
-                    if cid in cid_to_tvg:
-                        tvg_id = cid_to_tvg[cid]
-                        new_p = ET.SubElement(root, "programme", attrib={
-                            "start": elem.attrib.get("start", ""),
-                            "stop": elem.attrib.get("stop", ""),
-                            "channel": tvg_id,
-                        })
-                        for child in elem:
-                            new_p.append(child)
-                        matched_counts[tvg_id] += 1
-                    elem.clear()
-
-            print(f"[FUENTE OK] {url} -> {len(cid_to_tvg)} canales emparejados")
-            del source_channels, cid_to_tvg
-            gc.collect()
-        except Exception as e:
-            print(f"[AVISO FUENTE] {url}: {e}")
-
-    matched_total = 0
-    for tvg_id, (display_name, _, _) in CHANNELS.items():
-        if matched_counts[tvg_id] > 0:
+        if added_count > 0:
             matched_total += 1
-            print(f"[OK] {tvg_id} ({matched_counts[tvg_id]} programas)")
+            print(f"[OK] {tvg_id} -> {matched_cid} ({added_count} programas)")
         else:
-            print(f"[SIN GUIA] {tvg_id} ({display_name}) sin programas en fuentes")
+            fallback_total += 1
+            add_fallback_programme(root, tvg_id, display_name)
+            print(f"[RESPALDO] {tvg_id} ({display_name}) sin programas en fuente")
 
     tree = ET.ElementTree(root)
     ET.indent(tree, space="  ")
     tree.write("epg.xml", encoding="utf-8", xml_declaration=True)
-    print(f"epg.xml generado: {matched_total} con guía real, {len(CHANNELS) - matched_total} sin guía.")
+    print(f"epg.xml generado: {matched_total} con guía real, {fallback_total} con respaldo.")
 
 
 if __name__ == "__main__":
